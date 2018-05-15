@@ -7,6 +7,15 @@
   box-shadow: 3px 0 6px rgba(0,0,0,.24);
 }
 
+#nav-profilePic {
+  position: relative;
+  left: -10px;
+  border-radius: 50%;
+  height: 40px;
+  float: left;
+  margin-left: -10px
+}
+
 .nav-button {
   color: whitesmoke;
   text-decoration: none
