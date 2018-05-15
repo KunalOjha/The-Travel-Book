@@ -1,0 +1,30 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+  box-shadow: 3px 0 6px rgba(0,0,0,.24);
+}
+
+.nav-button {
+  color: whitesmoke;
+  text-decoration: none
+}
+
+.nav-icon {
+  padding: 5px;
+  position: relative;
+  top: -5px;
+  left: -8px;
+}
+
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-dialog-container {
+    padding-top: 0px !important;
+    width: 100% !important;
+    height: auto !important;
+}

@@ -1,0 +1,27 @@
+<mat-sidenav-container class="app-conainer sidenav-container">
+  <mat-sidenav-content>
+      <pre>{{(userInfo$ | async) | json }}</pre>
+    <mat-toolbar style="background-color: rgb(3, 26, 26); color: whitesmoke">
+      <mat-toolbar-row>
+        <span>Travel Blog</span>
+        <span class="nav-spacer"></span>
+        <div *ngIf="!(userInfo$ | async).isLoggedIn">
+            <span style="margin-right: 25px">
+              <a (click)="openLogInDialog()" class="nav-button" href="#">Sign In</a>
+            </span>
+            <span> <a class="nav-button" href="#">Register</a></span>
+        </div>
+
+        <div *ngIf="(userInfo$ | async).isLoggedIn">
+            <span style="margin-right: 25px; text-align: center">
+                <a class="nav-button" href="#">{{(userInfo$ | async).userName}}</a>
+              </span>
+            <span>
+              <a class="nav-button" (click)="logout()" href="#">Log Out</a>
+            </span>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<main-dashboard></main-dashboard>

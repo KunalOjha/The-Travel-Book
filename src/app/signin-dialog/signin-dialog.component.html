@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-sm-6">
+      <form id="signin-form" #f="ngForm">
+          <h2>Sign In</h2>
+          <br>
+          <mat-form-field style="width: 90%;">
+            <input color="white" matInput ngModel name="email" placeholder="Email" type="email" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field style="width: 90%;">
+            <input matInput ngModel name="password" placeholder="Password" type="password" required>
+          </mat-form-field>
+          <button color="accent"mat-raised-button>Submit</button>
+        </form>
+  </div>
+  <div class="col-sm-6" style="padding-top: 12%">
+    <div>
+      <button (click)="onLogin('google')" style="margin-bottom: 5px; width: 100%; background-color: #d54b3d" mat-raised-button mat-dialog-close>Google</button>
+      <button (click)="onLogin('facebook')" style="margin-bottom: 5px; width: 100%; background-color: #4267b2" mat-raised-button mat-dialog-close="">Facebook</button>
+      <!-- <button (click)="onLogin('twitter')" style="width: 100%; background-color: #1da1f2" mat-raised-button mat-dialog-close="">Twitter</button> -->
+    </div>
+   </div>
+</div>
+
