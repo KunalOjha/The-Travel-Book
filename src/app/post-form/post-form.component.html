@@ -1,3 +1,30 @@
-<p>
-  post-form works!
-</p>
+<div class="container">
+  <div class="row">
+      <h1 >Create a New Blog Post</h1>
+      <br>
+    <form>
+        <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="email" class="form-control" id="post-title" aria-describedby="Enter Title" placeholder="Enter title">
+          </div>
+          <div class="form-group">
+              <label for="Title">Description</label>
+              <input type="email" class="form-control" id="post-desc" aria-describedby="Enter a description" placeholder="Enter a description">
+              <small id="emailHelp" class="form-text text-muted">A brief description of this post.</small>
+            </div>
+            <div class="form-group">
+          <label for="Image Url">Image Url</label>
+          <input type="url" class="form-control" id="post-imageURL" aria-describedby="Enter an image Url" placeholder="Image Url">
+          <small id="emailHelp" class="form-text text-muted">Cover image for blog entry</small>
+        </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Blog Entry</label>
+        <textarea type="password" class="form-control" id="post-entry" aria-describedby="Enter blog entry" placeholder="Enter Post Here!" rows=20></textarea>
+      </div>
+      <div style="float: right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button pull-right class="btn btn-default" routerLink="/main" >Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -11,4 +11,6 @@ export class PostFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  constructor(private router: Router) {}
+
 }
