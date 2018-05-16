@@ -5,20 +5,29 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { ICredentials } from '../model/signin.model';
 import { Store } from '@ngrx/store';
-import { LoginUser, LogoutUser } from './login.actions';
+import { LoginUser, LogoutUser, LoginAdmin } from './login.actions';
 import { tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
+import { MainDashboardComponent } from '../main-dashboard/main-dashboard.component';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth, private store: Store<any>) {}
+  private adminId ='XI6JVm0PdARwR2QcdMQykNnKJFS2';
+
+  constructor(private router: Router,  private afAuth: AngularFireAuth, private store: Store<any>, private snackBar: MatSnackBar) {}
 
   watchAuthState() {
     return this.afAuth.authState.pipe(
       tap(userData => {
         if (!!userData) {
+          this.snackBar.open(`Welcome, ${userData.displayName}!`, null, {duration: 2000})
           this.store.dispatch(new LoginUser(userData));
+          if (this.adminId === userData.uid)
+          this.store.dispatch(new LoginAdmin())
         }
       })
     );
@@ -44,7 +53,8 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut();
-    this.store.dispatch(new LogoutUser())
+    this.store.dispatch(new LogoutUser());
+    this.router.navigate(['main'])
   }
 
 }

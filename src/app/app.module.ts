@@ -16,6 +16,15 @@ import { MainDashboardComponent } from './main-dashboard/main-dashboard.componen
 import { SigninDialogComponent } from './signin-dialog/signin-dialog.component';
 import { AuthService } from './shared/auth.service';
 import { INITIAL_APP_STATE } from './store';
+import { PostsModule } from './posts/posts.module';
+import { RouterModule, Routes } from '@angular/router';
+import { PostFormComponent } from './post-form/post-form.component';
+
+const routes: Routes = [
+  { path: 'main', component: MainDashboardComponent},
+  { path: 'post', component: PostFormComponent},
+  { path: '**', redirectTo: 'main'}
+];
 
 @NgModule({
   declarations: [
@@ -33,10 +42,12 @@ import { INITIAL_APP_STATE } from './store';
     MaterialsModule,
     FormsModule,
     NgbModule.forRoot(),
+    PostsModule,
     AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    StoreModule.forRoot(INITIAL_APP_STATE)
+    StoreModule.forRoot(INITIAL_APP_STATE),
+    RouterModule.forRoot(routes)
   ],
   providers: [AuthService, AngularFireAuth],
   bootstrap: [AppComponent]

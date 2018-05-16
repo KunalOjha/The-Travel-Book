@@ -1,35 +1,38 @@
 <div class="grid-container">
-  <mat-grid-list cols="3" rowHeight="170px">
-      <!-- <button mat-raised-button color="warn">Create New Post</button> not sure about this yet -->
-      <mat-grid-tile colspan="3" rowspan="1" >
-        <h1 class="main-title"><strong>The Travel Blog</strong></h1>
-        <img style="width: 100%" src="../../assets/map-banner.png" height="100%" alt="Main Banner">
-      </mat-grid-tile>
+    <mat-grid-list cols="3" rowHeight="100px">
+        <mat-grid-tile colspan="3" rowspan="2">
+            <h1 class="main-title"><strong>The Travel Blog</strong></h1>
+            <img style="width:100%; padding-top: 20px" src="../../assets/map-banner.png" height="104%" alt="Main Banner">
+        </mat-grid-tile>
     </mat-grid-list>
-  <mat-grid-list cols="3" rowHeight="305px">
-    <mat-grid-tile colspan="3" rowspan="1" rowHeight="100px" >
-      <img mat-card-image style="z-index: 1;" src="../../assets/main-banner.jpg" height="100%" alt="Main Banner">
-    </mat-grid-tile>
-  </mat-grid-list>
-  <mat-grid-list id="cardsContainer" cols="3" rowHeight="300px">
-    <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+    <mat-grid-list cols="3" rowHeight="100px">
+        <mat-grid-tile colspan="3" rowspan="4" rowHeight="100px">
+            <img mat-card-image style="z-index: 1;" src="../../assets/main-banner.jpg" height="100%" alt="Sub Banner">
+        </mat-grid-tile>
+    </mat-grid-list>
+    <button  *ngIf="(editMode$ | async)" (click)="newPost()" mat-raised-button color="warn">
+        <mat-icon>add_circle</mat-icon> New Post
+      </button>
+    <mat-grid-list id="cardsContainer" cols="3" rowHeight="300px">
+        <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
+            <mat-card class="dashboard-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        {{card.title}}
+                        <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" xPosition="before">
+                            <button mat-menu-item>Expand</button>
+                            <button mat-menu-item>Remove</button>
+                        </mat-menu>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                    <div>Card Content Here</div>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
 </div>
+<pre>{{(editMode$ | async) | json}}</pre>
