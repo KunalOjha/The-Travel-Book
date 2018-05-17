@@ -18,8 +18,7 @@
           <small id="emailHelp" class="form-text text-muted">Cover image for blog entry</small>
         </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Blog Entry</label>
-        <textarea type="password" class="form-control" id="post-entry" aria-describedby="Enter blog entry" placeholder="Enter Post Here!" rows=20></textarea>
+        <quill-editor [style]="{height: '200px'}" [modules]="modules"></quill-editor>
       </div>
       <div style="float: right">
           <button type="submit" class="btn btn-primary">Submit</button>
