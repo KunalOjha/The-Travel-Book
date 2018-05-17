@@ -1,15 +1,7 @@
-<div class="card grid-item">
-    <div class="wrapper thumbnail">
-      <img [src]="previewImageUrl" class="">
-      <div class="caption">
-        <h3 id="thumbnail-label">{{previewTitle}}</h3>
-        <p>{{previewDescription}}</p>
-      </div>
-      <div class="caption card-footer">
-        <ul class="list-inline">
-          <li><i class="fa fa-user"></i></li>
-          <li>14</li>
-        </ul>
-      </div>
-    </div>
+<div class="card blog-card" style="width: 100%; height: 275px">
+  <img class="card-img-top" [src]="previewImageUrl" alt="Insert Cover Image">
+  <div class="card-body">
+    <h2 class="card-title blog-card-title">{{previewTitle}}</h2>
+    <h4 class="card-text blog-card-text">{{previewDescription}}</h4>
   </div>
+</div>
