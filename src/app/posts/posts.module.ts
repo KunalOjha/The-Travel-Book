@@ -3,13 +3,18 @@ import { CommonModule } from '@angular/common';
 import { PostFormComponent } from '../post-form/post-form.component';
 import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
+import { PreviewCardComponent } from '../preview-card/preview-card.component';
+import { MaterialsModule } from '../materials.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [PostFormComponent],
+  declarations: [PostFormComponent, PreviewCardComponent],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
-    QuillModule
+    QuillModule,
+    MaterialsModule
   ],
   exports: [PostFormComponent]
 })

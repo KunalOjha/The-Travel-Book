@@ -8,6 +8,10 @@ import { Router } from '@angular/router';
 })
 export class PostFormComponent implements OnInit {
 
+  title: string;
+  description: string;
+  imageUrl: string;
+
   ngOnInit() {
   }
 
