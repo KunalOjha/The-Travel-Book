@@ -49,6 +49,7 @@ export class MainNavComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.store.dispatch(new deactivateEditMode())
   }
 
 }
