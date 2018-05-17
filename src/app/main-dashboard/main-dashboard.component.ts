@@ -9,7 +9,7 @@ import { IPostsState } from '../posts/posts.reducers';
 @Component({
   selector: 'main-dashboard',
   templateUrl: './main-dashboard.component.html',
-  styleUrls: ['./main-dashboard.component.css']
+  styleUrls: ['./main-dashboard.component.css', '../../blog-card.css']
 })
 export class MainDashboardComponent implements OnInit{
 
