@@ -1,6 +1,6 @@
 <mat-sidenav-container class="app-conainer sidenav-container">
   <mat-sidenav-content>
-    <mat-toolbar style="background-color: rgb(3, 26, 26); color: whitesmoke">
+    <mat-toolbar [ngClass]="(editMode$ | async)? 'editMode': null" style="background-color: rgb(3, 26, 26); color: whitesmoke">
       <mat-toolbar-row>
         <span>Travel Blog</span>
         <span class="nav-spacer"></span>

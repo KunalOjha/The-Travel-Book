@@ -21,6 +21,7 @@ import { activateEditMode, deactivateEditMode } from '../posts/posts.actions';
 export class MainNavComponent implements OnInit {
 
   userInfo$: Observable<IUserState>;
+  editMode$;
 
   constructor(
     private store: Store<IAppState>,
@@ -31,6 +32,7 @@ export class MainNavComponent implements OnInit {
   ngOnInit() {
     this.authService.watchAuthState().subscribe();
     this.userInfo$ = this.store.select("user");
+    this.editMode$ = this.store.select('post', 'editMode');
   }
 
   openLogInDialog() {
