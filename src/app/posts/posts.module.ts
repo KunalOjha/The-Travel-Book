@@ -6,6 +6,7 @@ import { QuillModule } from 'ngx-quill';
 import { PreviewCardComponent } from '../preview-card/preview-card.component';
 import { MaterialsModule } from '../materials.module';
 import { FormsModule } from '@angular/forms';
+import { PostsService } from '../posts.service';
 
 @NgModule({
   declarations: [PostFormComponent, PreviewCardComponent],
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     QuillModule,
     MaterialsModule
   ],
-  exports: [PostFormComponent]
+  exports: [PostFormComponent],
+  providers: [PostsService]
 })
 export class PostsModule { }

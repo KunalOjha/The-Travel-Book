@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgModel } from '@angular/forms';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-form',
@@ -17,10 +18,12 @@ export class PostFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmitForm(f) {
-    console.log(f);
+  constructor(private router: Router, private postsService: PostsService) {
   }
 
-  constructor(private router: Router) {}
+  onSubmitForm(entry) {
+    this.postsService.createPost(entry);
+    this.router.navigate(['/main']);
+  }
 
 }

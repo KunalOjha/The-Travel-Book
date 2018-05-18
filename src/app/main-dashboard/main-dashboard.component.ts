@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { IUserState } from '../shared/user.reducers';
 import { Observable } from 'rxjs/Observable';
 import { IPostsState } from '../posts/posts.reducers';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'main-dashboard',
@@ -13,21 +14,17 @@ import { IPostsState } from '../posts/posts.reducers';
 })
 export class MainDashboardComponent implements OnInit{
 
-  editMode$ : Observable<any>;
+  blogPosts$: Observable<any>;
+  editMode$: Observable<any>;
 
-  cards = [
-    { title: 'Card 1', cols: 1, rows: 1 },
-    { title: 'Card 2', cols: 1, rows: 1 },
-    { title: 'Card 3', cols: 1, rows: 1 }
-  ];
-
-  constructor(private router: Router, private store: Store<IAppState>) {}
+  constructor(private router: Router, private store: Store<IAppState>, private postsService: PostsService) {}
 
   ngOnInit() {
     this.editMode$ = this.store.select('post', 'editMode');
+    this.blogPosts$ = this.postsService.getAllPosts();
   }
 
-  newPost() {
+  navToNewPostForm() {
     this.router.navigate(['/post']);
   }
 }
