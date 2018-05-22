@@ -8,16 +8,14 @@
   background-color: #424242 !important;
   display: block;
   padding: 3px;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  line-height: 1.42857143;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  width: 32%;
+  flex-grow: 1;
   border-radius: 4px;
+  margin: 4px
 }
 
 .blog-card img {
-  height: 190px !important;
+  height: 300px !important;
 
 }
 

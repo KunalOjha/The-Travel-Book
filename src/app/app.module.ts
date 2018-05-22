@@ -22,6 +22,7 @@ import { PostFormComponent } from './post-form/post-form.component';
 
 const routes: Routes = [
   { path: 'main', component: MainDashboardComponent},
+  { path: 'post/:id', component: PostFormComponent},
   { path: 'post', component: PostFormComponent},
   { path: '**', redirectTo: 'main'}
 ];
