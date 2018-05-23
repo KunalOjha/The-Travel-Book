@@ -14,8 +14,8 @@
         <mat-icon class="editMode">add_circle</mat-icon> New Post
       </button>
       <div style="display: flex !important; flex-wrap: wrap !important">
-        <div class="card blog-card" style="max-width: 33%;" *ngFor="let i = index; let post of (blogPosts$ | async)">
-          <a href="" [routerLink]='[post]'>
+        <div class="card blog-card" style="max-width: 33%;" *ngFor="let post of (blogPosts$ | async); let i = index">
+          <a [routerLink]="['/post', i]" >
             <div class="card-body">
               <h2 class="card-title blog-card-title">{{post.title}}</h2>
               <h4 class="card-text blog-card-text">{{post.description}}</h4>
@@ -25,3 +25,5 @@
         </div>
       </div>
 </div>
+
+<!-- <pre>{{ (blogPosts$ | async) | json }}</pre> -->

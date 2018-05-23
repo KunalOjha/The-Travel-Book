@@ -24,4 +24,4 @@ export class RegisterUser implements Action {
   readonly type = REGISTER;
 }
 
-export type LoginActions = LoginUser | LoginAdmin |LogoutUser | RegisterUser;
+export type LoginActions = LoginUser | LoginAdmin | LogoutUser | RegisterUser;

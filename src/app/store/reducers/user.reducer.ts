@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
-import { LOGIN, LOGOUT, REGISTER, LoginActions, LOGINADMIN } from './login.actions';
+import { LOGIN, LOGOUT, REGISTER, LoginActions, LOGINADMIN } from '../actions/login.actions';
 
-export interface IUserState {
+export interface State {
   isLoggedIn: boolean,
   isAdmin?: boolean,
   uuid: string,
@@ -9,14 +9,14 @@ export interface IUserState {
   userPhotoURL?: string
 }
 
-const INITIAL_USER_STATE: IUserState = {
+const INITIAL_USER_STATE: State = {
   isLoggedIn: false,
   isAdmin: false,
   uuid: null,
   userName : null,
 }
 
-export function UserReducer(state = INITIAL_USER_STATE, action: LoginActions) {
+export function userReducer(state = INITIAL_USER_STATE, action: LoginActions) {
   switch(action.type) {
     case LOGIN:
       return {
@@ -43,5 +43,5 @@ export function UserReducer(state = INITIAL_USER_STATE, action: LoginActions) {
         ...state
       }
   }
-  return state
+  return state;
 }

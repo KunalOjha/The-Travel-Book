@@ -4,13 +4,14 @@ import { SigninDialogComponent } from '../signin-dialog/signin-dialog.component'
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from 'firebase';
 import { Store } from '@ngrx/store';
-import { IUserState } from '../shared/user.reducers';
+
 import { Observable } from 'rxjs';
 import { filter, tap, share} from 'rxjs/operators';
-import { LogoutUser } from '../shared/login.actions';
+
 import { AuthService } from '../shared/auth.service';
-import { IAppState } from '../store';
-import { activateEditMode, deactivateEditMode } from '../posts/posts.actions';
+import { IAppState } from '../store/store';
+import { activateEditMode, deactivateEditMode } from 'src/app/store/actions/mode.actions';
+
 
 @Component({
   selector: 'main-nav',
@@ -20,7 +21,7 @@ import { activateEditMode, deactivateEditMode } from '../posts/posts.actions';
 })
 export class MainNavComponent implements OnInit {
 
-  userInfo$: Observable<IUserState>;
+  userInfo$;
   editMode$;
 
   constructor(
@@ -32,7 +33,7 @@ export class MainNavComponent implements OnInit {
   ngOnInit() {
     this.authService.watchAuthState().subscribe();
     this.userInfo$ = this.store.select("user");
-    this.editMode$ = this.store.select('post', 'editMode');
+    this.editMode$ = this.store.select("mode", "editMode");
   }
 
   openLogInDialog() {

@@ -10,4 +10,4 @@ export class activateEditMode implements Action{
 export class deactivateEditMode implements Action{
   readonly type = EDIT_MODE_OFF
 }
-export type PostActions = activateEditMode | deactivateEditMode;
+export type modeActions = activateEditMode | deactivateEditMode;

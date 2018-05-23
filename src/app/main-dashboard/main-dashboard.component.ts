@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IAppState } from '../store';
+import { IAppState } from '../store/store';
 import { Router } from '@angular/router';
-import { IUserState } from '../shared/user.reducers';
 import { Observable } from 'rxjs/Observable';
-import { IPostsState } from '../posts/posts.reducers';
-import { PostsService } from '../posts.service';
+import { requestBlogPosts } from '../store/actions/blogPost.actions';
 
 @Component({
   selector: 'main-dashboard',
@@ -14,14 +12,17 @@ import { PostsService } from '../posts.service';
 })
 export class MainDashboardComponent implements OnInit{
 
-  blogPosts$: Observable<any>;
   editMode$: Observable<any>;
+  blogPosts$: Observable<any>;
 
-  constructor(private router: Router, private store: Store<IAppState>, private postsService: PostsService) {}
+  constructor(private router: Router, private store: Store<IAppState>) {}
 
   ngOnInit() {
-    this.editMode$ = this.store.select('post', 'editMode');
-    this.blogPosts$ = this.postsService.getAllPosts();
+    //fetch blog posts on start
+    this.store.dispatch(new requestBlogPosts());
+
+    this.editMode$ = this.store.select('mode', 'editMode');
+    this.blogPosts$ = this.store.select('posts', 'blogs')
   }
 
   navToNewPostForm() {

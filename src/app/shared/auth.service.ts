@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { ICredentials } from '../model/signin.model';
 import { Store } from '@ngrx/store';
-import { LoginUser, LogoutUser, LoginAdmin } from './login.actions';
+import { LoginUser, LogoutUser, LoginAdmin } from '../store/actions/login.actions'
 import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { MainDashboardComponent } from '../main-dashboard/main-dashboard.component';
