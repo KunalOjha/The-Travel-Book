@@ -7,14 +7,14 @@
               <div class="col-md-7">
                   <div class="form-group">
                       <label for="Title">Title</label>
-                      <input #formTitle="ngModel" type="text" name="title" maxlength="34" [(ngModel)]="title" class="form-control" id="post-title" aria-describedby="Enter Title" placeholder="Enter title" required>
+                      <input #formTitle="ngModel" type="text" name="title" maxlength="34" [(ngModel)]="blogPost.title" class="form-control" id="post-title" placeholder="Enter title" required>
                       <div *ngIf="formTitle.invalid && formTitle.touched" maxlength="102" class="alert alert-danger">
                           Title field is required
                       </div>
                   </div>
                   <div class="form-group">
                       <label for="Descripion">Description</label>
-                      <input #desc="ngModel" type="text" name="description" [(ngModel)]="description" class="form-control" id="post-desc" aria-describedby="Enter a description" placeholder="Enter a description" required>
+                      <input #desc="ngModel" type="text" name="description" [(ngModel)]="blogPost.description" class="form-control" id="post-desc" [value]="blogPost.description" required>
                       <div *ngIf="desc.invalid && desc.touched" class="alert alert-danger">
                           A description/summary of this post is required
                       </div>
@@ -22,7 +22,7 @@
                   </div>
                   <div class="form-group">
                       <label for="Image Url">Image Url</label>
-                      <input #image="ngModel" type="url" name="imageUrl" [(ngModel)]="imageUrl" class="form-control" id="post-imageURL" aria-describedby="Enter an image Url" placeholder="Image Url" required>
+                      <input #image="ngModel" type="url" name="imageUrl" [(ngModel)]="blogPost.imageUrl" class="form-control" id="post-imageURL" [value]="blogPost.imageUrl" required>
                       <div *ngIf="image.invalid && image.touched" class="alert alert-danger">
                           Image is required
                       </div>
@@ -30,7 +30,7 @@
                   </div>
               </div>
               <div class="col-md-5">
-                  <preview-card [previewTitle]="title" [previewDesc]="description" [previewImageUrl]="imageUrl"></preview-card>
+                  <preview-card [previewPost]="blogPost"></preview-card>
               </div>
           </div>
           <div class="form-group">

@@ -1,19 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { IAppState } from '../store/store';
+import { filter, switchMap, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { IBlogPost } from '../model/blogPost.model';
 
 @Component({
   selector: 'preview-card',
   templateUrl: './preview-card.component.html',
   styleUrls: ['./preview-card.component.css', '../../blog-card.css']
 })
-export class PreviewCardComponent implements OnInit {
+export class PreviewCardComponent {
 
-  @Input() previewTitle: string = "My Journey to Machu Pichu";
-  @Input('previewDesc') previewDescription: string= "My first Solo Trip, which was an experience I'll never forget..";
-  @Input() previewImageUrl: string ="http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/w3css/img_mountains_wide.jpg";
+  @Input() previewPost: IBlogPost;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  constructor(private route: ActivatedRoute, private store: Store<IAppState>) { }
 }
