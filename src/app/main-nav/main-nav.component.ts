@@ -33,7 +33,7 @@ export class MainNavComponent implements OnInit {
   ngOnInit() {
     this.authService.watchAuthState().subscribe();
     this.userInfo$ = this.store.select("user");
-    this.editMode$ = this.store.select("mode", "editMode");
+    this.editMode$ = this.store.select("mode", "edit");
   }
 
   openLogInDialog() {

@@ -17,31 +17,37 @@ import { deactivateEditMode } from '../store/actions/mode.actions';
 })
 export class PostFormComponent implements OnInit, OnDestroy {
 
-  editMode$: Subscription;
+  mode$: Subscription;
+  editMode: boolean;
+  createMode: boolean;
   blog$: Subscription;
   blogPost: IBlogPost;
-  editMode: boolean;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private store: Store < IAppState > , private postsService: PostsService) {}
 
   ngOnInit() {
-    this.editMode$ = this.store.select('mode', 'editMode').subscribe(editMode => this.editMode = editMode );
-    console.log(this.editMode);
-      if (!this.editMode) {
-        alert('case 1');
-          this.blogPost = {
-              title: "Title of Blog Post",
-              description: "A brief description of the blog post entry",
-              imageUrl: "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/w3css/img_mountains_wide.jpg"
-          }
-      } else {
-        alert('case 2')
+    this.mode$ = this.store.select('mode').subscribe(mode => {
+      this.editMode = mode.edit,
+      this.createMode = mode.create
+    });
+
+      if (this.createMode) this.setDefaultValues()
+
+      else {
           this.blog$ = this.store.select('posts', 'blogs').pipe(
               withLatestFrom(this.route.params),
               map(([blogs, params]) => this.blogPost = blogs[params.id])
           ).subscribe()
       }
+  }
+
+  private setDefaultValues() {
+    return this.blogPost = {
+      title: "Title of Blog Post",
+      description: "A brief description of the blog post entry",
+      imageUrl: "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/w3css/img_mountains_wide.jpg"
+  }
   }
 
   onSubmitForm(entry) {
@@ -50,6 +56,6 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-      this.editMode$.unsubscribe();
+      this.mode$.unsubscribe();
   }
 }
