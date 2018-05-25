@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { NgForm } from '@angular/forms';
+import 'rxjs/add/operator/map';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,12 @@ export class PostsService {
   }
 
   getAllPosts() {
-    return this.db.list('/posts').valueChanges();
+    return this.db.list('/posts').snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.val();
+        const id = a.payload.key;
+        return { id, ...data };
+      });
+    });
   }
 }

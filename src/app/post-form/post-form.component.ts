@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { IAppState } from '../store/store';
 import { PostsService } from '../posts/posts.service';
 import { Subscription, Observable } from 'rxjs';
-import { map, tap, withLatestFrom, startWith, share } from 'rxjs/operators';
+import { map, tap, withLatestFrom, startWith, share, filter } from 'rxjs/operators';
 import { IBlogPost } from '../model/blogPost.model';
 
 @Component({
@@ -27,6 +27,9 @@ export class PostFormComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute, private store: Store < IAppState > , private postsService: PostsService) {}
 
   ngOnInit() {
+
+    this.id = this.route.snapshot.params.id
+
     this.mode$ = this.store.select('mode').subscribe(mode => {
       this.editMode = mode.edit,
       this.createMode = mode.create
@@ -36,12 +39,12 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
       else {
           this.blog$ = this.store.select('posts', 'blogs').pipe(
-              withLatestFrom(this.route.params),
-              map(([blogs, params]) => {
-                this.id = params.id;
-                this.blogPost = blogs[params.id];
-              })
-          ).subscribe()
+            tap(x=>console.log(x)),
+            filter(blog => {
+              console.log(blog);
+              return  blog['id'] == this.id
+            }),
+          ).subscribe(x=>console.log(x))
       }
   }
 

@@ -15,7 +15,7 @@
       </button>
       <div style="display: flex !important; flex-wrap: wrap !important">
         <div class="card blog-card" style="min-width: 33%; max-width: 33%;" *ngFor="let post of (blogPosts$ | async); let i = index">
-          <button (click)="selectBlogCard(i)" >
+          <button (click)="selectBlogCard(post.id)" >
             <div class="card-body">
               <h2 class="card-title blog-card-title">{{post.title}}</h2>
               <h4 class="card-text blog-card-text">{{post.description}}</h4>
