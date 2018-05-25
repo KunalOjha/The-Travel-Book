@@ -14,14 +14,14 @@
         <mat-icon class="editMode">add_circle</mat-icon> New Post
       </button>
       <div style="display: flex !important; flex-wrap: wrap !important">
-        <div class="card blog-card" style="max-width: 33%;" *ngFor="let post of (blogPosts$ | async); let i = index">
-          <a [routerLink]="['/post', i]" >
+        <div class="card blog-card" style="min-width: 33%; max-width: 33%;" *ngFor="let post of (blogPosts$ | async); let i = index">
+          <button (click)="selectBlogCard(i)" >
             <div class="card-body">
               <h2 class="card-title blog-card-title">{{post.title}}</h2>
               <h4 class="card-text blog-card-text">{{post.description}}</h4>
               <img style="height:185px" class="card-img-top" [src]="post.imageUrl" alt="Insert Cover Image">
             </div>
-          </a>
+          </button>
         </div>
       </div>
 </div>

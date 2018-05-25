@@ -18,6 +18,14 @@ export class PostsService {
     })
   }
 
+  updatePost(blogId: number, post: NgForm) {
+    this.db.object('/posts/'+ blogId).update(post);
+  }
+
+  deletePost(blogId: number) {
+    this.db.object('/posts/'+ blogId).remove();
+  }
+
   getAllPosts() {
     return this.db.list('/posts').valueChanges();
   }

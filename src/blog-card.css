@@ -5,13 +5,19 @@
 }
 
 .blog-card {
-  background-color: #424242 !important;
   display: block;
+  margin: 2px;
   padding: 3px;
-  width: 32%;
+  min-width: 32%;
+  max-width: 32%;
   flex-grow: 1;
   border-radius: 4px;
-  margin: 4px
+}
+
+.blog-card >  button {
+  background-color:  #424242;
+  width: 100%;
+  padding: 5px
 }
 
 .blog-card img {

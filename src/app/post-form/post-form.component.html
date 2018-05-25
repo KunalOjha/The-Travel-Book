@@ -33,11 +33,12 @@
                   <preview-card [previewPost]="blogPost"></preview-card>
               </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="margin-top: 20px">
               <quill-editor [style]="{height: '420px'}"></quill-editor>
           </div>
-          <div style="float: right">
-              <button type="submit" class="btn btn-primary">Submit</button>
+          <div style="float: right; margin-bottom: 20px">
+              <button type="submit" class="btn btn-primary" style="margin-right: 5px">Submit</button>
+              <button   *ngIf="id" type="submit" (click)="onDeletePost()" class="btn btn-danger" style="margin-right: 5px">Delete</button>
               <button pull-right class="btn btn-default" routerLink="/main">Cancel</button>
           </div>
       </form>

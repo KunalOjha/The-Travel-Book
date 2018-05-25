@@ -8,7 +8,6 @@ import { PostsService } from '../posts/posts.service';
 import { Subscription, Observable } from 'rxjs';
 import { map, tap, withLatestFrom, startWith, share } from 'rxjs/operators';
 import { IBlogPost } from '../model/blogPost.model';
-import { deactivateEditMode } from '../store/actions/mode.actions';
 
 @Component({
   selector: 'app-post-form',
@@ -22,6 +21,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   createMode: boolean;
   blog$: Subscription;
   blogPost: IBlogPost;
+  id: number;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private store: Store < IAppState > , private postsService: PostsService) {}
@@ -37,7 +37,10 @@ export class PostFormComponent implements OnInit, OnDestroy {
       else {
           this.blog$ = this.store.select('posts', 'blogs').pipe(
               withLatestFrom(this.route.params),
-              map(([blogs, params]) => this.blogPost = blogs[params.id])
+              map(([blogs, params]) => {
+                this.id = params.id;
+                this.blogPost = blogs[params.id];
+              })
           ).subscribe()
       }
   }
@@ -51,8 +54,14 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmitForm(entry) {
-      this.postsService.createPost(entry);
+      if (this.id) this.postsService.updatePost(this.id, entry.value)
+      else this.postsService.createPost(entry);
+
       this.router.navigate(['/main']);
+  }
+
+  onDeletePost() {
+    this.postsService.deletePost(this.id)
   }
 
   ngOnDestroy() {
