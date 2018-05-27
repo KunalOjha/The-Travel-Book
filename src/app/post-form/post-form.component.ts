@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgModel } from '@angular/forms';
+import { NgModel, NgForm } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 import { IAppState } from '../store/store';
@@ -21,29 +21,27 @@ export class PostFormComponent implements OnInit, OnDestroy {
   createMode: boolean;
   blog$: Subscription;
   blogPost: IBlogPost;
-  id: number;
+  paramId: string;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private store: Store < IAppState > , private postsService: PostsService) {}
 
   ngOnInit() {
-
-    this.id = this.route.snapshot.params.id
+    this.paramId = this.route.snapshot.params.id
 
     this.mode$ = this.store.select('mode').subscribe(mode => {
       this.editMode = mode.edit,
       this.createMode = mode.create
     });
 
-      if (this.createMode) this.setDefaultValues()
-
-      else {
-          this.blog$ = this.store.select('posts', 'blogs').pipe(
-            map((posts) => {
-              return posts.find(post => post.id == this.id)
-            })
-          ).subscribe(post => this.blogPost = post);
-      }
+    if (this.createMode) this.setDefaultValues();
+    else {
+        this.blog$ = this.store.select('posts', 'blogs').pipe(
+          map((posts) => {
+            return posts.find(post => post.id == this.paramId)
+          })
+        ).subscribe(post => this.blogPost = post);
+    }
   }
 
   private setDefaultValues() {
@@ -54,15 +52,22 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
   }
 
-  onSubmitForm(entry) {
-      if (this.id) this.postsService.updatePost(this.id, entry.value)
+  onSubmitForm(entry: NgForm) {
+      if (!!this.paramId) this.postsService.updatePost(this.blogPost.id, entry.value)
       else this.postsService.createPost(entry);
 
       this.router.navigate(['/main']);
   }
 
   onDeletePost() {
-    this.postsService.deletePost(this.id)
+    if (!confirm('Are you sure you want to delete this Post?')) return null;
+
+    this.postsService.deletePost(this.blogPost.id);
+    this.router.navigate(['/main']);
+  }
+
+  onCancel() {
+    this.router.navigate(['/main']);
   }
 
   ngOnDestroy() {

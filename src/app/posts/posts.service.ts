@@ -20,14 +20,6 @@ export class PostsService {
     })
   }
 
-  updatePost(blogId: number, post: NgForm) {
-    this.db.object('/posts/'+ blogId).update(post);
-  }
-
-  deletePost(blogId: number) {
-    this.db.object('/posts/'+ blogId).remove();
-  }
-
   getAllPosts() {
     return this.db.list('/posts').snapshotChanges().map(actions => {
       return actions.map(a => {
@@ -36,5 +28,13 @@ export class PostsService {
         return { id, ...data };
       });
     });
+  }
+
+  updatePost(blogId: string, post: NgForm) {
+    this.db.object('/posts/'+ blogId).update(post);
+  }
+
+  deletePost(blogId: string) {
+    this.db.object('/posts/'+ blogId).remove();
   }
 }
