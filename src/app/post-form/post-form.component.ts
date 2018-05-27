@@ -39,11 +39,10 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
       else {
           this.blog$ = this.store.select('posts', 'blogs').pipe(
-            filter((post, index) => {
-              console.log( post[index].id == this.id);
-              return post[index].id == this.id
-            }),
-          ).subscribe(x=>console.log(x))
+            map((posts) => {
+              return posts.find(post => post.id == this.id)
+            })
+          ).subscribe(post => this.blogPost = post);
       }
   }
 
