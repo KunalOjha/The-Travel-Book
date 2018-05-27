@@ -29,7 +29,11 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   }
 
   selectBlogCard(uid:string) {
-    this.router.navigate(['post', uid]);
+    if(this.viewMode) {
+      alert('View Mode not yet implemented!')
+      return;
+    };
+    this.router.navigate(['post', 'edit', uid]);
   }
 
   navToNewPostForm() {

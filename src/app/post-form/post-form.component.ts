@@ -19,7 +19,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   mode$: Subscription;
   editMode: boolean;
   createMode: boolean;
-  blog$: Subscription;
+  blog$: Observable<IBlogPost[]> = this.store.select('posts', 'blogs');
   blogPost: IBlogPost;
   paramId: string;
 
@@ -36,7 +36,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
     if (this.createMode) this.setDefaultValues();
     else {
-        this.blog$ = this.store.select('posts', 'blogs').pipe(
+        this.blog$.pipe(
           map((posts) => {
             return posts.find(post => post.id == this.paramId)
           })
@@ -53,15 +53,15 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmitForm(entry: NgForm) {
-      if (!!this.paramId) this.postsService.updatePost(this.blogPost.id, entry.value)
-      else this.postsService.createPost(entry);
+      if (!!this.paramId && confirm('Update this Blog Post?')) this.postsService.updatePost(this.blogPost.id, entry.value)
+      else if (this.createMode) this.postsService.createPost(entry);
 
       this.router.navigate(['/main']);
   }
 
   onDeletePost() {
     //if user cancels prompt, function finishes without calling delete function
-    if (!confirm('Are you sure you want to delete this Post?')) return;;
+    if (!confirm('Are you sure you want to delete this Post?')) return;
 
     this.postsService.deletePost(this.blogPost.id);
     this.router.navigate(['/main']);
