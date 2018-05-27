@@ -60,7 +60,8 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   onDeletePost() {
-    if (!confirm('Are you sure you want to delete this Post?')) return null;
+    //if user cancels prompt, function finishes without calling delete function
+    if (!confirm('Are you sure you want to delete this Post?')) return;;
 
     this.postsService.deletePost(this.blogPost.id);
     this.router.navigate(['/main']);
