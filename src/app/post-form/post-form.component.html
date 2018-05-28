@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
-      <h1>Create a New Blog Post</h1>
+      <h1 *ngIf="createMode; else editPostTitle">Create a New Blog Post</h1>
+      <ng-template #editPostTitle><h1>Edit Blog Post</h1></ng-template>
       <br>
       <form #f="ngForm" (ngSubmit)="onSubmitForm(f)">
           <div class="row">

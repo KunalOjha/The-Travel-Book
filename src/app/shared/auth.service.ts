@@ -54,7 +54,7 @@ export class AuthService {
   logout() {
     this.afAuth.auth.signOut();
     this.store.dispatch(new LogoutUser());
-    this.router.navigate(['main'])
+    this.router.navigate([''])
   }
 
 }
