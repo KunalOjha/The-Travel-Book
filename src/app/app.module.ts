@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialsModule } from './materials.module';
 import { FormsModule } from '@angular/forms';
-import { AngularFireModule, FirebaseOptionsToken } from 'angularfire2';
+import { AngularFireModule, FirebaseOptionsToken, FirebaseAppNameToken, FirebaseAppConfigToken } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { StoreModule } from '@ngrx/store'
@@ -44,9 +44,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MaterialsModule,
     FormsModule,
-    NgbModule.forRoot(),
     PostsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
+    AngularFireModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     EffectsModule.forRoot([BlogEffects]),
@@ -55,6 +54,8 @@ const routes: Routes = [
   ],
   providers: [
     { provide: FirebaseOptionsToken, useValue: environment.firebase },
+    // { provide: FirebaseAppNameToken, useValue: 'angular-auth-firebase' },
+    // { provide: FirebaseAppConfigToken, useValue: undefined }
     AuthService,
     AngularFireAuth
   ],
