@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialsModule } from './materials.module';
 import { FormsModule } from '@angular/forms';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, FirebaseOptionsToken } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { StoreModule } from '@ngrx/store'
@@ -53,7 +53,11 @@ const routes: Routes = [
     StoreModule.forRoot(reducers),
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService, AngularFireAuth],
+  providers: [
+    { provide: FirebaseOptionsToken, useValue: environment.firebase },
+    AuthService,
+    AngularFireAuth
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
