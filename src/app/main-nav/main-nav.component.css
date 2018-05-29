@@ -26,6 +26,10 @@
   font-size: 20px
 }
 
+.nav-button:hover {
+  cursor: pointer;
+}
+
 .nav-icon {
   padding: 5px;
   position: relative;
