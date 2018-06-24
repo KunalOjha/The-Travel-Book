@@ -7,9 +7,10 @@ import { PreviewCardComponent } from '../preview-card/preview-card.component';
 import { MaterialsModule } from '../materials.module';
 import { FormsModule } from '@angular/forms';
 import { PostsService } from './posts.service';
+import { PostComponent } from '../post/post.component';
 
 @NgModule({
-  declarations: [PostFormComponent, PreviewCardComponent],
+  declarations: [PostFormComponent, PreviewCardComponent, PostComponent],
   imports: [
     CommonModule,
     FormsModule,
