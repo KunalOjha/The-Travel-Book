@@ -9,7 +9,7 @@ import { activateCreateMode } from "../store/actions/mode.actions";
 @Component({
   selector: "main-dashboard",
   templateUrl: "./main-dashboard.component.html",
-  styleUrls: ["./main-dashboard.component.css", "../../blog-card.css"]
+  styleUrls: ["./main-dashboard.component.scss", "../../blog-card.css"]
 })
 export class MainDashboardComponent implements OnInit, OnDestroy {
   blogPosts$: Observable<any>;

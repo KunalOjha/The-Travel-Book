@@ -1,16 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PreviewCardComponent } from './preview-card.component';
+import { PreviewCardComponent } from "./preview-card.component";
+import { RouterModule, ActivatedRoute } from "@angular/router";
+import { APP_BASE_HREF } from "@angular/common";
+import { StoreModule } from "@ngrx/store";
 
-describe('PreviewCardComponent', () => {
+describe("PreviewCardComponent", () => {
   let component: PreviewCardComponent;
   let fixture: ComponentFixture<PreviewCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreviewCardComponent ]
-    })
-    .compileComponents();
+      imports: [RouterModule.forRoot([]), StoreModule.forRoot({})],
+      declarations: [PreviewCardComponent],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: "/" },
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { params: { id: 1 } } }
+        }
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +29,7 @@ describe('PreviewCardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

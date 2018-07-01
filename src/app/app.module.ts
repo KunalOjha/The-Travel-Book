@@ -51,7 +51,6 @@ const routes: Routes = [
     PostsModule,
     AngularFireModule,
     AngularFireAuthModule,
-
     AngularFireDatabaseModule,
     EffectsModule.forRoot([BlogEffects]),
     StoreModule.forRoot(reducers),

@@ -1,19 +1,12 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { NgModel, NgForm } from "@angular/forms";
+import { NgForm } from "@angular/forms";
 
 import { Store } from "@ngrx/store";
 import { IAppState } from "../store/store";
 import { PostsService } from "../posts/posts.service";
 import { Subscription, Observable } from "rxjs";
-import {
-  map,
-  tap,
-  withLatestFrom,
-  startWith,
-  share,
-  filter
-} from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { IBlogPost } from "../model/blogPost.model";
 
 @Component({
