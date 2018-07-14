@@ -30,6 +30,7 @@ import { BlogEffects } from "./store/effects/blogPost.effects";
 
 const routes: Routes = [
   { path: "post/edit/:id", component: PostFormComponent, pathMatch: "full" },
+  { path: "post/new", component: PostFormComponent, pathMatch: "full" },
   { path: "post/:id", component: PostComponent },
   { path: "", component: MainDashboardComponent },
   { path: "**", redirectTo: "" }

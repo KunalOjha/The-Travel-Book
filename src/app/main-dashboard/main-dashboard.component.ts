@@ -39,7 +39,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
 
   navToNewPostForm() {
     this.store.dispatch(new activateCreateMode());
-    this.router.navigate(["/post"]);
+    this.router.navigate(["/post/new"]);
   }
 
   ngOnDestroy() {
