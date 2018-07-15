@@ -17,12 +17,8 @@
   </button>
   <div class="container" style="width: 100%">
     <div class="card blog-card col-md-4 col-sm-12" *ngFor="let post of (blogPosts$ | async); let i = index">
-      <button (click)="selectBlogCard(post.id)">
-        <div class="card-body">
-          <h2 class="card-title blog-card-title">{{post.title}}</h2>
-          <h4 class="card-text blog-card-text">{{post.description}}</h4>
-          <img style="height:185px" class="card-img-top" [src]="post.imageUrl" alt="Insert Cover Image">
-        </div>
+      <button class="blog-card-button" (click)="selectBlogCard(post.id)">
+        <blog-card [post]="post"></blog-card>
       </button>
     </div>
   </div>

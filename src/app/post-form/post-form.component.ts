@@ -11,7 +11,7 @@ import { IBlogPost } from "../model/blogPost.model";
 @Component({
   selector: "app-post-form",
   templateUrl: "./post-form.component.html",
-  styleUrls: ["./post-form.component.css"]
+  styleUrls: ["./post-form.component.css", "../../blog-card.css"]
 })
 export class PostFormComponent implements OnInit, OnDestroy {
   mode$: Subscription;

@@ -1,5 +1,3 @@
-/* Application-wide style rules */
-
 .card-img-top {
   width: 100% !important;
 }
@@ -8,29 +6,28 @@
   margin-top: 20px;
 }
 
-.blog-card > button {
+.blog-card-button {
   background-color: #424242;
   width: 100%;
   padding: 5px;
 }
 
 .blog-card img {
-  height: 300px !important;
+  height: 280px !important;
 }
 
 .blog-card-title {
   color: lightsteelblue;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
-  margin-top: 10px;
+  font-family: "Comic Sans MS", "Comic Sans";
+  margin-top: -15px;
   text-align: center;
-  font-size: 28px;
   height: 20px;
 }
 
 .blog-card-text {
   color: lightgray;
   padding-top: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   text-align: center;
   overflow-x: hidden;
   overflow-y: hidden;

@@ -8,9 +8,6 @@
           <span style="margin-right: 25px">
             <a (click)="openLogInDialog()" class="nav-button">Sign In</a>
           </span>
-          <span>
-            <a class="nav-button" href="#">Register</a>
-          </span>
         </div>
         <div *ngIf="(userInfo$ | async).isLoggedIn">
           <img id="nav-profilePic" [src]="(userInfo$ | async).userPhotoURL" alt="User Profile Picture">
