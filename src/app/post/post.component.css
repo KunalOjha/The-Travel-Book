@@ -6,10 +6,15 @@
 
 .post-title {
   position: absolute;
-  top: 220px;
+  text-align: center;
+  top: 225px;
   right: 50%;
   transform: translate(50%, -50%);
-  color: white;
-  font-size: 62px;
-  text-shadow: 2px solid black;
+  color: whitesmoke;
+  font-size: 76px;
+  text-shadow: 1px 1px 15px #000;
+}
+
+.post-content {
+  margin-top: 40px;
 }

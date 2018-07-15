@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
-
 import { Store } from "@ngrx/store";
 import { IAppState } from "../store/store";
 import { PostsService } from "../posts/posts.service";
@@ -23,7 +22,6 @@ export class PostFormComponent implements OnInit, OnDestroy {
   paramId: string;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private store: Store<IAppState>,
     private postsService: PostsService
@@ -61,20 +59,23 @@ export class PostFormComponent implements OnInit, OnDestroy {
     if (!!this.paramId && confirm("Update this Blog Post?"))
       this.postsService.updatePost(this.blogPost.id, entry.value);
     else if (this.createMode) this.postsService.createPost(entry);
+    else return null;
 
-    this.router.navigate(["/main"]);
+    this.postsService.returnToMainView();
   }
 
   onDeletePost() {
-    //if user cancels prompt, function finishes without calling delete function
-    if (!confirm("Are you sure you want to delete this Post?")) return;
+    if (!confirm("Are you sure you want to delete this Post?")) return null;
 
     this.postsService.deletePost(this.blogPost.id);
-    this.router.navigate(["/main"]);
+
+    this.postsService.returnToMainView();
   }
 
   onCancel() {
-    this.router.navigate(["/main"]);
+    if (!confirm("Are you sure you want to cancel?")) return null;
+
+    this.postsService.returnToMainView();
   }
 
   ngOnDestroy() {

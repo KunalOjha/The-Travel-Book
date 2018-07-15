@@ -1,14 +1,26 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "angularfire2/database";
-import * as firebase from "firebase";
 import { NgForm } from "@angular/forms";
+import { deactivateEditMode } from "../store/actions/mode.actions";
+import { Store } from "../../../node_modules/@ngrx/store";
+import { IAppState } from "../store/store";
 import "rxjs/add/operator/map";
+import { Router } from "../../../node_modules/@angular/router";
 
 @Injectable({
   providedIn: "root"
 })
 export class PostsService {
-  constructor(private db: AngularFireDatabase) {}
+  constructor(
+    private db: AngularFireDatabase,
+    private store: Store<IAppState>,
+    private router: Router
+  ) {}
+
+  returnToMainView() {
+    this.store.dispatch(new deactivateEditMode());
+    this.router.navigate(["/main"]);
+  }
 
   createPost(f: NgForm) {
     this.db.list("/posts/").push({

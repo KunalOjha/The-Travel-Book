@@ -10,17 +10,17 @@
         <div class="col-md-7">
           <div class="form-group">
             <label for="Title">Title</label>
-            <input #formTitle="ngModel" type="text" name="title" maxlength="34" [(ngModel)]="blogPost.title" class="form-control" id="post-title"
+            <input #formTitle="ngModel" type="text" name="title" maxlength="26" [(ngModel)]="blogPost.title" class="form-control" id="post-title"
               placeholder="Enter title" required>
-            <div *ngIf="formTitle?.invalid && formTitle.touched" maxlength="102" class="alert alert-danger">
+            <div *ngIf="formTitle.invalid && formTitle.touched" maxlength="102" class="alert alert-danger">
               Title field is required
             </div>
           </div>
           <div class="form-group">
             <label for="Descripion">Description</label>
-            <input #desc="ngModel" type="text" name="description" [(ngModel)]="blogPost.description" class="form-control" id="post-desc"
-              [value]="blogPost.description" required>
-            <div *ngIf="desc?.invalid && desc.touched" class="alert alert-danger">
+            <input #desc="ngModel" type="text" name="description" maxlength="52" [(ngModel)]="blogPost.description" class="form-control"
+              id="post-desc" [value]="blogPost.description" required>
+            <div *ngIf="desc.invalid && desc.touched" class="alert alert-danger">
               A description/summary of this post is required
             </div>
             <small id="emailHelp" class="form-text text-muted">A brief description of this post.</small>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="form-group" style="margin-top: 20px">
-        <quill-editor #quill="ngModel" [style]="{height: '420px'}" [(ngModel)]="blogPost.content" name="content"></quill-editor>
+        <quill-editor #quill="ngModel" [style]="{height: '420px'}" [(ngModel)]="blogPost.content" name="content" [required]="true"></quill-editor>
       </div>
       <div style="float: right; margin-bottom: 20px">
         <button type="submit" class="btn btn-primary" style="margin-right: 5px">Submit</button>

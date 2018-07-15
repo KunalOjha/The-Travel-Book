@@ -2,25 +2,27 @@
   <mat-sidenav-content>
     <mat-toolbar [ngClass]="(editMode$ | async)? 'editMode': null" style="background-color: rgb(3, 26, 26); color: whitesmoke">
       <mat-toolbar-row>
-        <span>Travel Blog</span>
+        <a id="travellist-nav-icon" routerLink="/">Travel Blog</a>
         <span class="nav-spacer"></span>
         <div *ngIf="!(userInfo$ | async).isLoggedIn">
-            <span style="margin-right: 25px">
-              <a (click)="openLogInDialog()" class="nav-button">Sign In</a>
-            </span>
-            <span> <a class="nav-button" href="#">Register</a></span>
+          <span style="margin-right: 25px">
+            <a (click)="openLogInDialog()" class="nav-button">Sign In</a>
+          </span>
+          <span>
+            <a class="nav-button" href="#">Register</a>
+          </span>
         </div>
         <div *ngIf="(userInfo$ | async).isLoggedIn">
-            <img id="nav-profilePic" [src]="(userInfo$ | async).userPhotoURL" alt="User Profile Picture">
-              <span style="text-align: center">
-                <button mat-button  class="nav-button" [matMenuTriggerFor]="menu">{{(userInfo$ | async).userName}}</button>
-                  <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="switchToEditMode()">Edit Mode</button>
-                    <button mat-menu-item (click)="switchToViewMode()">View Mode</button>
-                    <mat-divider></mat-divider>
-                    <button style="color: whitesmoke" mat-button (click)="logout()" href="#">Log Out</button>
-                  </mat-menu>
-              </span>
+          <img id="nav-profilePic" [src]="(userInfo$ | async).userPhotoURL" alt="User Profile Picture">
+          <span style="text-align: center">
+            <button mat-button class="nav-button" [matMenuTriggerFor]="menu">{{(userInfo$ | async).userName}}</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="switchToEditMode()">Edit Mode</button>
+              <button mat-menu-item (click)="switchToViewMode()">View Mode</button>
+              <mat-divider></mat-divider>
+              <button style="color: whitesmoke" mat-button (click)="logout()" href="#">Log Out</button>
+            </mat-menu>
+          </span>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
