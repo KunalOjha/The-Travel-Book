@@ -13,7 +13,7 @@
 }
 
 .blog-card img {
-  height: 280px !important;
+  height: 280px;
 }
 
 .blog-card-title {
@@ -33,4 +33,31 @@
   overflow-y: hidden;
   height: 32px;
   font-size: 16px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1256px) {
+  .blog-card-title {
+    font-size: 20px;
+  }
+  .blog-card-text {
+    padding-top: 5px;
+    font-size: 15px;
+    height: 37px;
+  }
+
+  .blog-card-img {
+    height: 220px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .card-body {
+    margin-top: -10px;
+  }
+  .blog-card-title {
+    margin-top: 0px;
+  }
+  .blog-card-text {
+    visibility: hidden;
+  }
 }
