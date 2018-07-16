@@ -56,9 +56,24 @@
   }
   .blog-card-title {
     margin-top: 0px;
-    font-size: 27px;
+    font-size: 20px;
   }
   .blog-card-text {
-    visibility: hidden;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .blog-card-text {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  .blog-card-title {
+    font-size: 18px;
+  }
+  .blog-card-text {
+    font-size: 11px;
   }
 }
