@@ -15,6 +15,8 @@
   <button class="editMode" *ngIf="(editMode$ | async)" (click)="navToNewPostForm()" mat-raised-button>
     <mat-icon class="editMode">add_circle</mat-icon> New Post
   </button>
+  <mat-progress-spinner *ngIf="!(blogsLoaded$ | async)" class="blog-progress-spinner" [color]="color" [mode]="mode">
+  </mat-progress-spinner>
   <div class="container" style="width: 100%">
     <div class="card blog-card col-md-4 col-sm-12" *ngFor="let post of (blogPosts$ | async); let i = index">
       <button class="blog-card-button" (click)="selectBlogCard(post.id)">

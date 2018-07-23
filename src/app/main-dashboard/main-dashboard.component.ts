@@ -12,6 +12,9 @@ import { activateCreateMode } from "../store/actions/mode.actions";
   styleUrls: ["./main-dashboard.component.scss", "../../blog-card.scss"]
 })
 export class MainDashboardComponent implements OnInit, OnDestroy {
+  color = "warn";
+  mode = "indeterminate";
+  blogsLoaded$: Observable<boolean>;
   blogPosts$: Observable<any>;
   editMode$: Observable<boolean>;
   viewMode: boolean = true;
@@ -24,6 +27,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     //fetch blog posts on start
     this.store.dispatch(new requestBlogPosts());
+
+    this.blogsLoaded$ = this.store.select("posts", "blogsLoaded");
     this.blogPosts$ = this.store.select("posts", "blogs");
 
     this.editMode$ = this.store.select("mode", "edit");
