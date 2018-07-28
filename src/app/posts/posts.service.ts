@@ -2,10 +2,10 @@ import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "angularfire2/database";
 import { NgForm } from "@angular/forms";
 import { deactivateEditMode } from "../store/actions/mode.actions";
-import { Store } from "../../../node_modules/@ngrx/store";
+import { Store } from "@ngrx/store";
 import { IAppState } from "../store/store";
 import "rxjs/add/operator/map";
-import { Router } from "../../../node_modules/@angular/router";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"

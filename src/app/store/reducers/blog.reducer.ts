@@ -1,4 +1,7 @@
-import { BlogPostActions, LOAD_BLOGPOSTS } from "../actions/blogPost.actions";
+import {
+  BlogPostActions,
+  LOAD_BLOGPOSTS_SUCCESS
+} from "../actions/blog.actions";
 
 export interface State {
   blogs: any;
@@ -15,7 +18,7 @@ export function blogReducer(
   action: BlogPostActions
 ) {
   switch (action.type) {
-    case LOAD_BLOGPOSTS:
+    case LOAD_BLOGPOSTS_SUCCESS:
       return {
         ...state,
         blogsLoaded: true,

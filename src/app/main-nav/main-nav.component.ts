@@ -7,8 +7,8 @@ import { IAppState } from "../store/store";
 import {
   activateEditMode,
   deactivateEditMode
-} from "src/app/store/actions/mode.actions";
-import { ActivatedRoute } from "../../../node_modules/@angular/router";
+} from "../store/actions/mode.actions";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "main-nav",

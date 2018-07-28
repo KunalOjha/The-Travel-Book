@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Action } from '@ngrx/store';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
-import { REQUEST_BLOGPOSTS, loadBlogPosts } from '../actions/blogPost.actions'
-import { PostsService } from '../../posts/posts.service';
+import { Injectable } from "@angular/core";
+import { Actions, Effect, ofType } from "@ngrx/effects";
+import { map, switchMap } from "rxjs/operators";
+import {
+  REQUEST_BLOGPOSTS,
+  loadBlogPostsSuccess
+} from "../actions/blog.actions";
+import { PostsService } from "../../posts/posts.service";
 
 @Injectable()
 export class BlogEffects {
@@ -13,11 +13,12 @@ export class BlogEffects {
   @Effect()
   loadBlog$ = this.actions$.pipe(
     ofType(REQUEST_BLOGPOSTS),
-    switchMap((action: Action) => {
+    switchMap(() => {
       return this.postsService.getAllPosts().pipe(
-          map(result => {
-            return new loadBlogPosts(result)
-          }))
+        map(result => {
+          return new loadBlogPostsSuccess(result);
+        })
+      );
     })
   );
 

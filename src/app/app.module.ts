@@ -1,15 +1,9 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialsModule } from "./materials.module";
 import { FormsModule } from "@angular/forms";
-import {
-  AngularFireModule,
-  FirebaseOptionsToken,
-  FirebaseAppNameToken,
-  FirebaseAppConfigToken
-} from "angularfire2";
+import { AngularFireModule, FirebaseOptionsToken } from "angularfire2";
 import { AngularFireAuthModule, AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { StoreModule } from "@ngrx/store";
@@ -27,6 +21,9 @@ import { RouterModule, Routes } from "@angular/router";
 import { PostFormComponent } from "./post-form/post-form.component";
 import { PostComponent } from "./post/post.component";
 import { BlogEffects } from "./store/effects/blogPost.effects";
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 const routes: Routes = [
   { path: "post/edit/:id", component: PostFormComponent, pathMatch: "full" },
@@ -55,7 +52,12 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     EffectsModule.forRoot([BlogEffects]),
     StoreModule.forRoot(reducers),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ServiceWorkerModule.register("/ngsw-worker.js", {
+      enabled: environment.production
+    }),
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
     { provide: FirebaseOptionsToken, useValue: environment.firebase },

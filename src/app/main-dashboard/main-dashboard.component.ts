@@ -3,7 +3,7 @@ import { Store } from "@ngrx/store";
 import { IAppState } from "../store/store";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
-import { requestBlogPosts } from "../store/actions/blogPost.actions";
+import { requestBlogPosts } from "../store/actions/blog.actions";
 import { activateCreateMode } from "../store/actions/mode.actions";
 
 @Component({
