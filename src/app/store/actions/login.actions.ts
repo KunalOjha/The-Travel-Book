@@ -1,10 +1,10 @@
-import { Action } from '@ngrx/store';
-import { User } from 'firebase';
+import { Action } from "@ngrx/store";
+import { User } from "firebase";
 
-export const LOGIN = 'LOGIN';
-export const LOGINADMIN = 'LOGINADMIN'
-export const LOGOUT = 'LOGOUT';
-export const REGISTER = 'REGISTER';
+export const LOGIN = "LOGIN";
+export const LOGINADMIN = "LOGINADMIN";
+export const LOGOUT = "LOGOUT";
+export const REGISTER = "REGISTER";
 
 export class LoginUser implements Action {
   readonly type = LOGIN;
