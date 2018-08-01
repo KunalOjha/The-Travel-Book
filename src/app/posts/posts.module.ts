@@ -5,10 +5,11 @@ import { PostsService } from "./posts.service";
 import { PostComponent } from "./components/post/post.component";
 import { PostFormComponent } from "./components/post-form/post-form.component";
 import { SharedModule } from "../shared/shared.module";
+import { PostsRoutingModule } from "./posts-routing.module";
 
 @NgModule({
   declarations: [PostFormComponent, PostComponent],
-  imports: [SharedModule, RouterModule, QuillModule],
+  imports: [SharedModule, PostsRoutingModule, RouterModule, QuillModule],
   exports: [PostFormComponent],
   providers: [PostsService]
 })

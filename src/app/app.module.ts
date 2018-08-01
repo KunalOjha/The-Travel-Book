@@ -6,7 +6,6 @@ import { AngularFireAuthModule, AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import { PostsModule } from "./posts/posts.module";
 import { RouterModule } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
@@ -35,7 +34,6 @@ import { environment } from "../environments/environment";
     SharedModule,
     BrowserModule,
     BrowserAnimationsModule,
-    PostsModule,
     AngularFireModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,

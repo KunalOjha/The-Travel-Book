@@ -2,7 +2,9 @@
   <mat-sidenav-content>
     <mat-toolbar [ngClass]="(editMode$ | async)? 'editMode': null" style="background-color: rgb(3, 26, 26); color: whitesmoke">
       <mat-toolbar-row>
-        <a id="travellist-nav-icon" routerLink="/">Travel Blog</a>
+        <a class="travellist-nav-icon" routerLink="/">Travel Blog</a>
+        <a class="travellist-nav-icon" routerLink="/world-map">World Map</a>
+        <a class="travellist-nav-icon" routerLink="/">Photos</a>
         <span class="nav-spacer"></span>
         <div *ngIf="!(userInfo$ | async).isLoggedIn">
           <span style="margin-right: 25px">

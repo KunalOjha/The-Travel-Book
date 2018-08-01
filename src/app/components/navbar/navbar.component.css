@@ -1,4 +1,10 @@
-#travellist-nav-icon {
+.travellist-nav-icon:hover {
+  text-decoration: none;
+  color: #e1755a;
+}
+
+.travellist-nav-icon {
+  margin-right: 25px;
   text-decoration: none;
   color: whitesmoke;
 }
