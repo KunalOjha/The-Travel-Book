@@ -1,15 +1,18 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { IAppState } from "../store/store";
+import { IAppState } from "../../store/store";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
-import { requestBlogPosts } from "../store/actions/blog.actions";
-import { activateCreateMode } from "../store/actions/mode.actions";
+import { requestBlogPosts } from "../../store/actions/blog.actions";
+import { activateCreateMode } from "../../store/actions/mode.actions";
 
 @Component({
   selector: "main-dashboard",
   templateUrl: "./main-dashboard.component.html",
-  styleUrls: ["./main-dashboard.component.scss", "../../blog-card.scss"]
+  styleUrls: [
+    "./main-dashboard.component.scss",
+    "./../../shared/components/blog-card/blog-card.scss"
+  ]
 })
 export class MainDashboardComponent implements OnInit, OnDestroy {
   color = "warn";
@@ -25,7 +28,6 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private store: Store<IAppState>) {}
 
   ngOnInit() {
-    //fetch blog posts on start
     this.store.dispatch(new requestBlogPosts());
 
     this.blogsLoaded$ = this.store.select("posts", "blogsLoaded");

@@ -2,16 +2,19 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { IAppState } from "../store/store";
-import { PostsService } from "../posts/posts.service";
+import { IAppState } from "../../../store/store";
+import { PostsService } from "../../../posts/posts.service";
 import { Subscription, Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { IBlogPost } from "../model/blogPost.model";
+import { IBlogPost } from "../../../model/blogPost.model";
 
 @Component({
   selector: "app-post-form",
   templateUrl: "./post-form.component.html",
-  styleUrls: ["./post-form.component.css", "../../blog-card.scss"]
+  styleUrls: [
+    "./post-form.component.css",
+    "./../../../shared/components/blog-card/blog-card.scss"
+  ]
 })
 export class PostFormComponent implements OnInit, OnDestroy {
   mode$: Subscription;

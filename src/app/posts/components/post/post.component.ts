@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { IBlogPost } from "../model/blogPost.model";
+import { IBlogPost } from "../../../model/blogPost.model";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { IAppState } from "../store/store";
+
 import { Store } from "@ngrx/store";
 import { map, combineLatest } from "rxjs/operators";
+import { IAppState } from "../../../store/store";
 
 @Component({
   selector: "app-post",
