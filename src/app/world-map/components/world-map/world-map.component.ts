@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { tileLayer, latLng } from "leaflet";
+import * as L from "leaflet";
 
 @Component({
   selector: "app-world-map",
@@ -10,15 +10,31 @@ export class WorldMapComponent implements OnInit {
   leafletZoom = 3;
   options = {
     layers: [
-      tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "..."
       })
     ],
     zoom: 3,
-    center: latLng(46.879966, -121.726909)
+    center: L.latLng(46.879966, -121.726909)
   };
+  leafletCenter: L.LatLng;
+  markerLayers: L.Marker<any>[];
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const marker1 = L.marker([46.879966, -121.726909], {
+      icon: L.icon({
+        iconUrl: "././../../../../assets/map-pin.png",
+        iconSize: [48, 48],
+        iconAnchor: [15, 48]
+      })
+    });
+
+    this.markerLayers = [marker1];
+  }
+
+  onMapReady(map: L.Map) {
+    map.scrollWheelZoom.disable();
+  }
 }

@@ -1,7 +1,8 @@
 #world-map-title {
-  margin-bottom: 50px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 #world-map-container {
-  height: 600px !important;
+  height: 600px;
 }
