@@ -9,9 +9,9 @@
       <div class="row">
         <div class="col-md-7">
           <div class="form-group">
-            <label for="Location Name">Location Name</label>
-            <input type="text" name="Location Name" class="form-control" required>
-            <div *ngIf="image?.invalid && image?.touched" class="alert alert-danger">
+            <label for="Location Name">Location</label>
+            <input #locName="ngModel" [(ngModel)]="blogPost.location" type="text" name="location" class="form-control" required>
+            <div *ngIf="locName?.invalid && locName?.touched" class="alert alert-danger">
               Location Name is required
             </div>
           </div>
@@ -19,15 +19,15 @@
             <div class="row">
               <div class="col-md-2">
                 <label for="Location Latitude">Latitude</label>
-                <input size="35" type="number" name="Location Longitude" class="form-control" required>
+                <input #locLat="ngModel" [(ngModel)]="blogPost.lat" type="number" name="lat" class="form-control" required>
               </div>
               <div class="col-md-2">
                 <label for="Location Longitude">Longitude</label>
-                <input size="15" type="number" name="Location Longitude" class="form-control" required>
+                <input #locLng="ngModel" [(ngModel)]="blogPost.lng" type="number" name="lng" class="form-control" required>
               </div>
-            </div>
-            <div *ngIf="image?.invalid && image?.touched" class="alert alert-danger">
-              Location Longitude is required
+              <div *ngIf="locLng.invalid && locLng.touched || locLat.invalid && locLat.touched" class="alert alert-danger">
+                Location and Longitude are required
+              </div>
             </div>
           </div>
           <div class="form-group">

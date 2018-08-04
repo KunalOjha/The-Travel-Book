@@ -34,7 +34,8 @@ export class PostFormComponent implements OnInit, OnDestroy {
     this.paramId = this.route.snapshot.params.id;
 
     this.mode$ = this.store.select("mode").subscribe(mode => {
-      (this.editMode = mode.edit), (this.createMode = mode.create);
+      this.editMode = mode.edit;
+      this.createMode = mode.create;
     });
 
     if (this.createMode) this.setDefaultValues();
@@ -51,6 +52,9 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
   private setDefaultValues() {
     return (this.blogPost = {
+      location: "Narnia",
+      lat: 0,
+      lng: 0,
       title: "Title of Blog Post",
       description: "A brief description of the blog post entry",
       imageUrl:
@@ -59,9 +63,10 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmitForm(entry: NgForm) {
-    if (!!this.paramId && confirm("Update this Blog Post?"))
+    if (!!this.paramId && confirm("Update this Blog Post?")) {
+      console.log(entry.value);
       this.postsService.updatePost(this.blogPost.id, entry.value);
-    else if (this.createMode) this.postsService.createPost(entry);
+    } else if (this.createMode) this.postsService.createPost(entry);
     else return null;
 
     this.postsService.returnToMainView();

@@ -9,6 +9,7 @@ import { MapService } from "../../../map.service";
 })
 export class WorldMapComponent implements OnInit {
   leafletZoom = 3;
+  selectedLocation = "Select a location";
   options = {
     layers: [
       L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -20,7 +21,6 @@ export class WorldMapComponent implements OnInit {
   };
   leafletCenter: L.LatLng;
   markerLayers: L.Marker<any>[];
-  selectedLocation = "Select a location";
 
   constructor(private mapService: MapService) {}
 
@@ -46,6 +46,6 @@ export class WorldMapComponent implements OnInit {
 
     this.selectedLocation = selectedLoc.name;
 
-    alert(selectedLoc.name);
+    alert(this.selectedLocation);
   }
 }
