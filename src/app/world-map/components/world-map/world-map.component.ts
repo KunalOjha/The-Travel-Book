@@ -45,7 +45,5 @@ export class WorldMapComponent implements OnInit {
     });
 
     this.selectedLocation = selectedLoc.name;
-
-    alert(this.selectedLocation);
   }
 }
