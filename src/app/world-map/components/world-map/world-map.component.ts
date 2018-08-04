@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import * as L from "leaflet";
+import { MapService } from "../../../map.service";
 
 @Component({
   selector: "app-world-map",
@@ -15,26 +16,36 @@ export class WorldMapComponent implements OnInit {
       })
     ],
     zoom: 3,
-    center: L.latLng(46.879966, -121.726909)
+    center: L.latLng(20, 0)
   };
   leafletCenter: L.LatLng;
   markerLayers: L.Marker<any>[];
+  selectedLocation = "Select a location";
 
-  constructor() {}
+  constructor(private mapService: MapService) {}
 
   ngOnInit() {
-    const marker1 = L.marker([46.879966, -121.726909], {
-      icon: L.icon({
-        iconUrl: "././../../../../assets/map-pin.png",
-        iconSize: [48, 48],
-        iconAnchor: [15, 48]
-      })
+    this.markerLayers = this.mapService.locations.map(location => {
+      return L.marker([location.lat, location.lng], {
+        icon: L.icon({
+          iconUrl: "././../../../../assets/map-pin.png",
+          iconSize: [48, 48],
+          iconAnchor: [15, 48]
+        })
+      }).on("click", this.onMarkerClick.bind(this));
     });
-
-    this.markerLayers = [marker1];
   }
-
   onMapReady(map: L.Map) {
     map.scrollWheelZoom.disable();
+  }
+
+  onMarkerClick(e) {
+    const selectedLoc = this.mapService.locations.find(location => {
+      return location.lat == e.latlng.lat && location.lng == e.latlng.lng;
+    });
+
+    this.selectedLocation = selectedLoc.name;
+
+    alert(selectedLoc.name);
   }
 }

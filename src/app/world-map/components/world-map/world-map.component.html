@@ -1,8 +1,12 @@
 <div class="container">
   <h1 id="world-map-title">Check Out Where I've Been!</h1>
   <div class="row">
-    <div id="world-map-container" leaflet [leafletOptions]="options">
+    <div id="world-map-container" leaflet [leafletOptions]="options" [leafletCenter]="leafletCenter" (leafletMapReady)="onMapReady($event)">
       <div *ngFor="let marker of markerLayers " [leafletLayer]="marker"></div>
     </div>
   </div>
 </div>
+
+<br>
+
+<h1>{{ selectedLocation }}</h1>
