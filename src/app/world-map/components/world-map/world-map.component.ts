@@ -1,6 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import * as L from "leaflet";
 import { MapService } from "../../../map.service";
+import { Store } from "../../../../../node_modules/@ngrx/store";
+import { State } from "../../../store/reducers/blog.reducer";
+import { take, map, tap } from "../../../../../node_modules/rxjs/operators";
+import { IBlogPost } from "../../../model/blogPost.model";
+import { IAppState } from "../../../store/store";
+import { Router } from "../../../../../node_modules/@angular/router";
 
 @Component({
   selector: "app-world-map",
@@ -8,8 +14,8 @@ import { MapService } from "../../../map.service";
   styleUrls: ["./world-map.component.css"]
 })
 export class WorldMapComponent implements OnInit {
-  leafletZoom = 3;
-  selectedLocation = "Select a location";
+  locations: IBlogPost[];
+  selectedLocation: IBlogPost;
   options = {
     layers: [
       L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -19,31 +25,51 @@ export class WorldMapComponent implements OnInit {
     zoom: 3,
     center: L.latLng(20, 0)
   };
+  mapIcon = {
+    icon: L.icon({
+      iconUrl: "././../../../../assets/map-pin.png",
+      iconSize: [48, 48],
+      iconAnchor: [15, 48]
+    })
+  };
+  leafletZoom = 3;
   leafletCenter: L.LatLng;
   markerLayers: L.Marker<any>[];
 
-  constructor(private mapService: MapService) {}
+  constructor(
+    private store: Store<IAppState>,
+    private cd: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.markerLayers = this.mapService.locations.map(location => {
-      return L.marker([location.lat, location.lng], {
-        icon: L.icon({
-          iconUrl: "././../../../../assets/map-pin.png",
-          iconSize: [48, 48],
-          iconAnchor: [15, 48]
+    this.store
+      .select("posts", "blogs")
+      .pipe(
+        take(1),
+        map((blogs: IBlogPost[]) => {
+          this.locations = blogs;
+          this.markerLayers = blogs.map(blog => {
+            return L.marker([blog.lat, blog.lng], this.mapIcon).on(
+              "click",
+              this.onMarkerClick.bind(this)
+            );
+          });
         })
-      }).on("click", this.onMarkerClick.bind(this));
-    });
+      )
+      .subscribe();
   }
   onMapReady(map: L.Map) {
     map.scrollWheelZoom.disable();
   }
 
   onMarkerClick(e) {
-    const selectedLoc = this.mapService.locations.find(location => {
+    console.log(this.locations);
+    const selectedLoc = this.locations.find(location => {
       return location.lat == e.latlng.lat && location.lng == e.latlng.lng;
     });
 
-    this.selectedLocation = selectedLoc.name;
+    this.selectedLocation = selectedLoc;
+    this.cd.detectChanges();
   }
 }
