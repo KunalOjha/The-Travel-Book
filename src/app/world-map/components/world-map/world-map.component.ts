@@ -1,8 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import * as L from "leaflet";
-import { MapService } from "../../../map.service";
 import { Store } from "../../../../../node_modules/@ngrx/store";
-import { State } from "../../../store/reducers/blog.reducer";
 import { take, map, tap } from "../../../../../node_modules/rxjs/operators";
 import { IBlogPost } from "../../../model/blogPost.model";
 import { IAppState } from "../../../store/store";
@@ -64,11 +62,9 @@ export class WorldMapComponent implements OnInit {
   }
 
   onMarkerClick(e) {
-    console.log(this.locations);
     const selectedLoc = this.locations.find(location => {
       return location.lat == e.latlng.lat && location.lng == e.latlng.lng;
     });
-
     this.selectedLocation = selectedLoc;
     this.cd.detectChanges();
   }
