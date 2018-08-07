@@ -40,9 +40,9 @@ import { environment } from "../environments/environment";
     EffectsModule.forRoot([BlogEffects]),
     StoreModule.forRoot(reducers),
     RouterModule.forRoot(routes),
-    ServiceWorkerModule.register("/ngsw-worker.js", {
-      enabled: environment.production
-    }),
+    // ServiceWorkerModule.register("/ngsw-worker.js", {
+    //   enabled: environment.production
+    // }),
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
