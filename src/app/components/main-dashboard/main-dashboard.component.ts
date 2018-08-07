@@ -28,8 +28,6 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private store: Store<IAppState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new requestBlogPosts());
-
     this.blogsLoaded$ = this.store.select("posts", "blogsLoaded");
     this.blogPosts$ = this.store.select("posts", "blogs");
 
