@@ -39,7 +39,7 @@ import { environment } from "../environments/environment";
     AngularFireDatabaseModule,
     EffectsModule.forRoot([BlogEffects]),
     StoreModule.forRoot(reducers),
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true, enableTracing: false }),
     ServiceWorkerModule.register("/ngsw-worker.js", {
       enabled: environment.production
     }),
@@ -47,7 +47,10 @@ import { environment } from "../environments/environment";
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
-    { provide: FirebaseOptionsToken, useValue: environment.firebase },
+    {
+      provide: FirebaseOptionsToken,
+      useValue: environment.firebase
+    },
     AuthService,
     AngularFireAuth
   ],
