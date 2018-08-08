@@ -1,5 +1,5 @@
 <section class="container" *ngIf="!!blogPost">
   <img class="post-image" [src]="blogPost.imageUrl" alt="">
-  <h1 class="post-title">{{blogPost.title}}</h1>
+  <h1 #postTitle class="post-title">{{blogPost.title}}</h1>
   <div class="post-content" [innerHTML]="blogPost.content"></div>
 </section>
