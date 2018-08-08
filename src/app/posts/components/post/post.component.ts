@@ -6,6 +6,7 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { map, combineLatest } from "rxjs/operators";
 import { IAppState } from "../../../store/store";
+import { requestBlogPosts } from "../../../store/actions/blog.actions";
 
 @Component({
   selector: "app-post",
@@ -21,10 +22,16 @@ export class PostComponent implements OnInit {
   constructor(private route: ActivatedRoute, private store: Store<IAppState>) {}
 
   ngOnInit() {
+    if (!this.blogPost) {
+      this.store.dispatch(new requestBlogPosts());
+    }
+
     this.blog$
       .pipe(
         combineLatest(this.params$),
         map(([posts, params]) => {
+          if (!posts) return null;
+
           return posts.find(post => post.id === params.get("id"));
         })
       )

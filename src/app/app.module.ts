@@ -7,7 +7,6 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { RouterModule } from "@angular/router";
-import { ServiceWorkerModule } from "@angular/service-worker";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { SharedModule } from "./shared/shared.module";
