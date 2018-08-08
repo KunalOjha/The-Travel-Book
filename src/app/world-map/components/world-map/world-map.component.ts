@@ -10,6 +10,7 @@ import {
 import { IBlogPost } from "../../../model/blogPost.model";
 import { IAppState } from "../../../store/store";
 import { Router } from "../../../../../node_modules/@angular/router";
+import { post } from "../../../../../node_modules/@types/selenium-webdriver/http";
 
 @Component({
   selector: "app-world-map",
@@ -43,7 +44,11 @@ export class WorldMapComponent implements OnInit {
     private store: Store<IAppState>,
     private cd: ChangeDetectorRef,
     private router: Router
-  ) {}
+  ) {
+    this.router.events.subscribe(e => {
+      console.log(e);
+    });
+  }
 
   ngOnInit() {
     this.store
@@ -67,8 +72,8 @@ export class WorldMapComponent implements OnInit {
     map.scrollWheelZoom.disable();
   }
 
-  navToPost() {
-    this.router.navigate(["post", this.selectedLocation.id]);
+  navToPost(postId: string) {
+    this.router.navigate(["post", postId]);
   }
 
   onMarkerClick(e) {

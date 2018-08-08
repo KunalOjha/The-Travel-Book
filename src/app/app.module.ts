@@ -38,7 +38,7 @@ import { environment } from "../environments/environment";
     AngularFireDatabaseModule,
     EffectsModule.forRoot([BlogEffects]),
     StoreModule.forRoot(reducers),
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { enableTracing: true }),
     // ServiceWorkerModule.register("/ngsw-worker.js", {
     //   enabled: environment.production
     // }),
