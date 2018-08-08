@@ -69,7 +69,6 @@ export class WorldMapComponent implements OnInit {
 
   navToPost() {
     this.router.navigate(["post", this.selectedLocation.id]);
-    this.cd.detectChanges();
   }
 
   onMarkerClick(e) {
@@ -77,6 +76,5 @@ export class WorldMapComponent implements OnInit {
       return location.lat == e.latlng.lat && location.lng == e.latlng.lng;
     });
     this.selectedLocation = selectedLoc;
-    this.cd.detectChanges();
   }
 }
