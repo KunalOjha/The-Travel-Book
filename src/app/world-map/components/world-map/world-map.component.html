@@ -14,7 +14,7 @@
       <br>
       <img style="height: 150px" src="../../../../assets/map-pin.png" alt="">
       <br>
-      <button id="location-button" color="primary" [routerLink]="['/post', selectedLocation.id]" mat-raised-button>Read More</button>
+      <button id="location-button" color="primary" (click)="navToPost()" mat-raised-button>Read More</button>
     </div>
     <div class="col-md-6">
       <blog-card [post]="selectedLocation"></blog-card>

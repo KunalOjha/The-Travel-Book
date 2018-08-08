@@ -67,6 +67,10 @@ export class WorldMapComponent implements OnInit {
     map.scrollWheelZoom.disable();
   }
 
+  navToPost() {
+    this.router.navigate(["post", this.selectedLocation.id]);
+  }
+
   onMarkerClick(e) {
     const selectedLoc = this.locations.find(location => {
       return location.lat == e.latlng.lat && location.lng == e.latlng.lng;
