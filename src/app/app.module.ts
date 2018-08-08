@@ -20,6 +20,7 @@ import { BlogEffects } from "./store/effects/blogPost.effects";
 import { reducers } from "./store/store";
 import { routes } from "./app.routes";
 import { environment } from "../environments/environment";
+import { WorldMapModule } from "./world-map/world-map.module";
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import { environment } from "../environments/environment";
   ],
   entryComponents: [SigninDialogComponent],
   imports: [
-    SharedModule,
     BrowserModule,
     BrowserAnimationsModule,
+    SharedModule,
+    WorldMapModule,
     AngularFireModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
