@@ -1,18 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  AfterViewInit
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { IBlogPost } from "../../../model/blogPost.model";
-import {
-  ActivatedRoute,
-  ParamMap,
-  Router,
-  NavigationEnd
-} from "@angular/router";
+import { ActivatedRoute, ParamMap } from "@angular/router";
 
 import { Store } from "@ngrx/store";
 import { map, combineLatest } from "rxjs/operators";
@@ -24,18 +13,13 @@ import { requestBlogPosts } from "../../../store/actions/blog.actions";
   templateUrl: "./post.component.html",
   styleUrls: ["./post.component.css"]
 })
-export class PostComponent implements OnInit, AfterViewInit {
-  @ViewChild("postTitle") postTitle: ElementRef;
+export class PostComponent implements OnInit {
   params$: Observable<ParamMap> = this.route.paramMap;
   paramId;
   blog$: Observable<IBlogPost[]> = this.store.select("posts", "blogs");
   public blogPost: IBlogPost;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<IAppState>
-  ) {}
+  constructor(private route: ActivatedRoute, private store: Store<IAppState>) {}
 
   ngOnInit() {
     if (!this.blogPost) {
@@ -52,13 +36,5 @@ export class PostComponent implements OnInit, AfterViewInit {
         })
       )
       .subscribe(post => (this.blogPost = post));
-  }
-  ngAfterViewInit() {
-    this.router.events.subscribe(e => {
-      if (e instanceof NavigationEnd) {
-        console.log("nav end", this.postTitle);
-        this.postTitle.nativeElement.focus();
-      }
-    });
   }
 }

@@ -1,12 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import * as L from "leaflet";
 import { Store } from "../../../../../node_modules/@ngrx/store";
-import {
-  take,
-  map,
-  tap,
-  takeUntil
-} from "../../../../../node_modules/rxjs/operators";
+import { map } from "../../../../../node_modules/rxjs/operators";
 import { IBlogPost } from "../../../model/blogPost.model";
 import { IAppState } from "../../../store/store";
 import { Router } from "../../../../../node_modules/@angular/router";
