@@ -1,5 +1,4 @@
 import { Routes } from "../../node_modules/@angular/router";
-import { WorldMapComponent } from "./world-map/components/world-map/world-map.component";
 import { MainDashboardComponent } from "./components/main-dashboard/main-dashboard.component";
 
 export const routes: Routes = [
@@ -9,7 +8,7 @@ export const routes: Routes = [
   },
   {
     path: "world-map",
-    component: WorldMapComponent
+    loadChildren: "../app/world-map/world-map.module#WorldMapModule"
   },
   {
     path: "",

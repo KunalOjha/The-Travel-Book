@@ -20,7 +20,6 @@ import { BlogEffects } from "./store/effects/blogPost.effects";
 import { reducers } from "./store/store";
 import { routes } from "./app.routes";
 import { environment } from "../environments/environment";
-import { WorldMapModule } from "./world-map/world-map.module";
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { WorldMapModule } from "./world-map/world-map.module";
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
-    WorldMapModule,
     AngularFireModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
