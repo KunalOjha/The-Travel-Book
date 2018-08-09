@@ -1,18 +1,17 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from "@angular/core";
 import * as L from "leaflet";
 import { Store } from "../../../../../node_modules/@ngrx/store";
 import { map } from "../../../../../node_modules/rxjs/operators";
 import { IBlogPost } from "../../../model/blogPost.model";
 import { IAppState } from "../../../store/store";
 import { Router } from "../../../../../node_modules/@angular/router";
-import { post } from "../../../../../node_modules/@types/selenium-webdriver/http";
 
 @Component({
   selector: "app-world-map",
   templateUrl: "./world-map.component.html",
   styleUrls: ["./world-map.component.css"]
 })
-export class WorldMapComponent implements OnInit {
+export class WorldMapComponent implements OnInit, OnDestroy {
   locations: IBlogPost[];
   selectedLocation: IBlogPost;
   options = {
@@ -34,19 +33,16 @@ export class WorldMapComponent implements OnInit {
   leafletZoom = 3;
   leafletCenter: L.LatLng;
   markerLayers: L.Marker<any>[];
+  subscription: any;
 
   constructor(
     private store: Store<IAppState>,
     private cd: ChangeDetectorRef,
     private router: Router
-  ) {
-    this.router.events.subscribe(e => {
-      console.log(e);
-    });
-  }
+  ) {}
 
   ngOnInit() {
-    this.store
+    this.subscription = this.store
       .select("posts", "blogs")
       .pipe(
         map((blogs: IBlogPost[]) => {
@@ -63,6 +59,11 @@ export class WorldMapComponent implements OnInit {
       )
       .subscribe();
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   onMapReady(map: L.Map) {
     map.scrollWheelZoom.disable();
   }
