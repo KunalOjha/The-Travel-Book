@@ -1,25 +1,29 @@
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import { IBlogPost } from "../../../model/blogPost.model";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IBlogPost } from '../../../model/blogPost.model';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { Store } from "@ngrx/store";
-import { map, combineLatest } from "rxjs/operators";
-import { IAppState } from "../../../store/store";
-import { requestBlogPosts } from "../../../store/actions/blog.actions";
+import { Store } from '@ngrx/store';
+import { map, combineLatest } from 'rxjs/operators';
+import { IAppState } from '../../../store/store';
+import { requestBlogPosts } from '../../../store/actions/blog.actions';
 
 @Component({
-  selector: "app-post",
-  templateUrl: "./post.component.html",
-  styleUrls: ["./post.component.css"]
+  selector: 'app-post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
   params$: Observable<ParamMap> = this.route.paramMap;
   paramId;
-  blog$: Observable<IBlogPost[]> = this.store.select("posts", "blogs");
+  blog$: Observable<IBlogPost[]> = this.store.select('posts', 'blogs');
   public blogPost: IBlogPost;
 
-  constructor(private route: ActivatedRoute, private store: Store<IAppState>) {}
+  constructor(
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef,
+    private store: Store<IAppState>
+  ) {}
 
   ngOnInit() {
     if (!this.blogPost) {
@@ -32,9 +36,12 @@ export class PostComponent implements OnInit {
         map(([posts, params]) => {
           if (!posts) return null;
 
-          return posts.find(post => post.id === params.get("id"));
+          return posts.find(post => post.id === params.get('id'));
         })
       )
-      .subscribe(post => (this.blogPost = post));
+      .subscribe(post => {
+        this.blogPost = post;
+        this.cd.detectChanges();
+      });
   }
 }

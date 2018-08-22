@@ -20,11 +20,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new requestBlogPosts());
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.cd.detectChanges();
-        alert('donezo');
-      }
-    });
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.cd.detectChanges();
+    //   }
+    // });
   }
 }
