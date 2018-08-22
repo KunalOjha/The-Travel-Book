@@ -1,23 +1,23 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from "@angular/core";
-import * as L from "leaflet";
-import { Store } from "../../../../../node_modules/@ngrx/store";
-import { map } from "../../../../../node_modules/rxjs/operators";
-import { IBlogPost } from "../../../model/blogPost.model";
-import { IAppState } from "../../../store/store";
-import { Router } from "../../../../../node_modules/@angular/router";
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import * as L from 'leaflet';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { map } from '../../../../../node_modules/rxjs/operators';
+import { IBlogPost } from '../../../model/blogPost.model';
+import { IAppState } from '../../../store/store';
+import { Router } from '../../../../../node_modules/@angular/router';
 
 @Component({
-  selector: "app-world-map",
-  templateUrl: "./world-map.component.html",
-  styleUrls: ["./world-map.component.css"]
+  selector: 'app-world-map',
+  templateUrl: './world-map.component.html',
+  styleUrls: ['./world-map.component.css']
 })
 export class WorldMapComponent implements OnInit, OnDestroy {
   locations: IBlogPost[];
   selectedLocation: IBlogPost;
   options = {
     layers: [
-      L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "..."
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '...'
       })
     ],
     zoom: 3,
@@ -25,7 +25,7 @@ export class WorldMapComponent implements OnInit, OnDestroy {
   };
   mapIcon = {
     icon: L.icon({
-      iconUrl: "././../../../../assets/map-pin.png",
+      iconUrl: '././../../../../assets/map-pin.png',
       iconSize: [48, 48],
       iconAnchor: [15, 48]
     })
@@ -43,14 +43,14 @@ export class WorldMapComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store
-      .select("posts", "blogs")
+      .select('posts', 'blogs')
       .pipe(
         map((blogs: IBlogPost[]) => {
           if (!!blogs) {
             this.locations = blogs;
             this.markerLayers = blogs.map(blog => {
               return L.marker([blog.lat, blog.lng], this.mapIcon).on(
-                "click",
+                'click',
                 this.onMarkerClick.bind(this)
               );
             });
@@ -69,7 +69,7 @@ export class WorldMapComponent implements OnInit, OnDestroy {
   }
 
   navToPost(postId: string) {
-    this.router.navigate(["post", postId]);
+    this.router.navigate(['post', postId]);
   }
 
   onMarkerClick(e) {
