@@ -1,21 +1,22 @@
-import { Routes } from "../../node_modules/@angular/router";
-import { MainDashboardComponent } from "./components/main-dashboard/main-dashboard.component";
+import { Routes } from '../../node_modules/@angular/router';
+import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
+import { PostComponent } from './posts/components/post/post.component';
 
 export const routes: Routes = [
+  // {
+  //   path: 'post',
+  //   component: PostComponent
+  // },
   {
-    path: "post",
-    loadChildren: "../app/posts/posts.module#PostsModule"
+    path: 'world-map',
+    loadChildren: '../app/world-map/world-map.module#WorldMapModule'
   },
   {
-    path: "world-map",
-    loadChildren: "../app/world-map/world-map.module#WorldMapModule"
-  },
-  {
-    path: "",
+    path: '',
     component: MainDashboardComponent
   },
   {
-    path: "**",
-    redirectTo: ""
+    path: '**',
+    redirectTo: ''
   }
 ];
