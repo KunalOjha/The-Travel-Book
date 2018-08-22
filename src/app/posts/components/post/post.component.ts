@@ -48,6 +48,7 @@ export class PostComponent implements OnInit {
       .subscribe(post => {
         this.blogPost = post;
       });
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.cd.detectChanges();
