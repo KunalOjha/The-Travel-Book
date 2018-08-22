@@ -1,12 +1,12 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { WorldMapComponent } from "./components/world-map/world-map.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { WorldMapComponent } from './components/world-map/world-map.component';
 
 const routes: Routes = [
-  {
-    path: "",
-    component: WorldMapComponent
-  }
+  // {
+  //   path: "",
+  //   component: WorldMapComponent
+  // }
 ];
 
 @NgModule({

@@ -20,8 +20,8 @@ import { BlogEffects } from './store/effects/blogPost.effects';
 import { reducers } from './store/store';
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
-import { PostComponent } from './posts/components/post/post.component';
 import { PostsModule } from './posts/posts.module';
+import { WorldMapModule } from './world-map/world-map.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import { PostsModule } from './posts/posts.module';
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
+    WorldMapModule,
     PostsModule,
     AngularFireModule,
     AngularFireAuthModule,

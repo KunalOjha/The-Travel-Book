@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 import { Store } from '../../../../../node_modules/@ngrx/store';
-import { map } from '../../../../../node_modules/rxjs/operators';
+import { map, filter } from '../../../../../node_modules/rxjs/operators';
 import { IBlogPost } from '../../../model/blogPost.model';
 import { IAppState } from '../../../store/store';
 import { Router } from '../../../../../node_modules/@angular/router';
@@ -45,16 +45,15 @@ export class WorldMapComponent implements OnInit, OnDestroy {
     this.subscription = this.store
       .select('posts', 'blogs')
       .pipe(
+        filter(blogs => !!blogs),
         map((blogs: IBlogPost[]) => {
-          if (!!blogs) {
-            this.locations = blogs;
-            this.markerLayers = blogs.map(blog => {
-              return L.marker([blog.lat, blog.lng], this.mapIcon).on(
-                'click',
-                this.onMarkerClick.bind(this)
-              );
-            });
-          }
+          this.locations = blogs;
+          this.markerLayers = blogs.map(blog => {
+            return L.marker([blog.lat, blog.lng], this.mapIcon).on(
+              'click',
+              this.onMarkerClick.bind(this)
+            );
+          });
         })
       )
       .subscribe();
