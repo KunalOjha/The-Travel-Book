@@ -69,6 +69,7 @@ export class WorldMapComponent implements OnInit, OnDestroy {
 
   navToPost(postId: string) {
     this.router.navigate(['post', postId]);
+    this.cd.detectChanges();
   }
 
   onMarkerClick(e) {
