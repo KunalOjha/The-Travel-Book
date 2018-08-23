@@ -16,8 +16,8 @@
           <span style="text-align: center">
             <button mat-button class="nav-button" [matMenuTriggerFor]="menu">{{(userInfo$ | async).userName}}</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="switchToEditMode()">Edit Mode</button>
-              <button mat-menu-item (click)="switchToViewMode()">View Mode</button>
+              <button mat-menu-item *ngIf="(userInfo$ | async).isAdmin" (click)="switchToEditMode()">Edit Mode</button>
+              <button mat-menu-item *ngIf="(userInfo$ | async).isAdmin" (click)="switchToViewMode()">View Mode</button>
               <mat-divider></mat-divider>
               <button style="color: whitesmoke" mat-button (click)="logout()" href="#">Log Out</button>
             </mat-menu>

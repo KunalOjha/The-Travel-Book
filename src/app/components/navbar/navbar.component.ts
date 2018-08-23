@@ -1,19 +1,20 @@
-import { Component, ViewEncapsulation, OnChanges, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { SigninDialogComponent } from "../signin-dialog/signin-dialog.component";
-import { Store } from "@ngrx/store";
-import { AuthService } from "../../shared/auth.service";
-import { IAppState } from "../../store/store";
+import { Component, ViewEncapsulation, OnChanges, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { SigninDialogComponent } from '../signin-dialog/signin-dialog.component';
+import { Store } from '@ngrx/store';
+import { AuthService } from '../../shared/auth.service';
+import { IAppState } from '../../store/store';
 import {
   activateEditMode,
   deactivateEditMode
-} from "../../store/actions/mode.actions";
-import { ActivatedRoute } from "@angular/router";
+} from '../../store/actions/mode.actions';
+import { ActivatedRoute } from '@angular/router';
+import { tap, shareReplay } from 'rxjs/operators';
 
 @Component({
-  selector: "app-navbar",
-  templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.css"],
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
@@ -23,14 +24,13 @@ export class NavbarComponent implements OnInit {
   constructor(
     private store: Store<IAppState>,
     private authService: AuthService,
-    private dialog: MatDialog,
-    private route: ActivatedRoute
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.authService.watchAuthState().subscribe();
-    this.userInfo$ = this.store.select("user");
-    this.editMode$ = this.store.select("mode", "edit");
+    this.userInfo$ = this.store.select('user').pipe(shareReplay());
+    this.editMode$ = this.store.select('mode', 'edit').pipe(shareReplay());
   }
 
   openLogInDialog() {

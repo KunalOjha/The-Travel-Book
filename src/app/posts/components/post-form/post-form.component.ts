@@ -64,7 +64,6 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
   onSubmitForm(entry: NgForm) {
     if (!!this.paramId && confirm('Update this Blog Post?')) {
-      console.log(entry.value);
       this.postsService.updatePost(this.blogPost.id, entry.value);
     } else if (this.createMode) this.postsService.createPost(entry);
     else return null;

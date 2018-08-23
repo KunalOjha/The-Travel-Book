@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  OnDestroy,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import * as L from 'leaflet';
 import { Store } from '../../../../../node_modules/@ngrx/store';
 import { map, filter } from '../../../../../node_modules/rxjs/operators';
@@ -12,6 +19,8 @@ import { Router } from '../../../../../node_modules/@angular/router';
   styleUrls: ['./world-map.component.css']
 })
 export class WorldMapComponent implements OnInit, OnDestroy {
+  @ViewChild('LocationSnapshot')
+  locationSnapshot: ElementRef;
   locations: IBlogPost[];
   selectedLocation: IBlogPost;
   options = {
@@ -78,5 +87,6 @@ export class WorldMapComponent implements OnInit, OnDestroy {
     });
     this.selectedLocation = selectedLoc;
     this.cd.detectChanges();
+    this.locationSnapshot.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 }

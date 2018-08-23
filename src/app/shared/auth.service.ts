@@ -1,22 +1,22 @@
-import { Injectable } from "@angular/core";
-import { AngularFireAuth } from "angularfire2/auth";
-import * as firebase from "firebase";
-import { ICredentials } from "../model/signin.model";
-import { Store } from "@ngrx/store";
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { auth } from 'firebase';
+import { ICredentials } from '../model/signin.model';
+import { Store } from '@ngrx/store';
 import {
   LoginUser,
   LogoutUser,
   LoginAdmin
-} from "../store/actions/login.actions";
-import { tap } from "rxjs/operators";
-import { MatSnackBar } from "@angular/material";
-import { Router } from "@angular/router";
+} from '../store/actions/login.actions';
+import { tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthService {
-  private adminId = "XI6JVm0PdARwR2QcdMQykNnKJFS2";
+  private adminId = 'XI6JVm0PdARwR2QcdMQykNnKJFS2';
 
   constructor(
     private router: Router,
@@ -42,20 +42,18 @@ export class AuthService {
 
   login(method: string, credentials?: ICredentials) {
     switch (method) {
-      case "facebook":
+      case 'facebook':
         return this.afAuth.auth
-          .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+          .signInWithPopup(new auth.FacebookAuthProvider())
           .catch(error => console.log(error));
 
-      case "google":
+      case 'google':
         return this.afAuth.auth
-          .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+          .signInWithPopup(new auth.GoogleAuthProvider())
           .catch(error => console.log(error));
 
-      case "twitter":
-        return this.afAuth.auth.signInWithPopup(
-          new firebase.auth.TwitterAuthProvider()
-        );
+      case 'twitter':
+        return this.afAuth.auth.signInWithPopup(new auth.TwitterAuthProvider());
 
       default:
         this.afAuth.auth.signInWithEmailAndPassword(
@@ -68,6 +66,6 @@ export class AuthService {
   logout() {
     this.afAuth.auth.signOut();
     this.store.dispatch(new LogoutUser());
-    this.router.navigate([""]);
+    this.router.navigate(['']);
   }
 }

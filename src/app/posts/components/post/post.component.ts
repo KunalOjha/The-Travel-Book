@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IBlogPost } from '../../../model/blogPost.model';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { map, combineLatest } from 'rxjs/operators';
@@ -19,7 +19,11 @@ export class PostComponent implements OnInit {
   blog$: Observable<IBlogPost[]> = this.store.select('posts', 'blogs');
   public blogPost: IBlogPost;
 
-  constructor(private route: ActivatedRoute, private store: Store<IAppState>) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store<IAppState>
+  ) {}
 
   ngOnInit() {
     if (!this.blogPost) {
@@ -30,11 +34,18 @@ export class PostComponent implements OnInit {
       .pipe(
         combineLatest(this.params$),
         map(([posts, params]) => {
+          this.paramId = params.get('id');
           if (!posts) return null;
-
           return posts.find(post => post.id === params.get('id'));
         })
       )
-      .subscribe(post => (this.blogPost = post));
+      .subscribe(post => {
+        this.blogPost = post;
+      });
+
+    this.store.select('mode').subscribe(mode => {
+      if (mode.edit) this.router.navigate(['post', 'edit', this.paramId]);
+      else if (mode.view) this.router.navigate(['post', this.paramId]);
+    });
   }
 }
