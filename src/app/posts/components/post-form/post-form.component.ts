@@ -1,26 +1,26 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { NgForm } from "@angular/forms";
-import { Store } from "@ngrx/store";
-import { IAppState } from "../../../store/store";
-import { PostsService } from "../../../posts/posts.service";
-import { Subscription, Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { IBlogPost } from "../../../model/blogPost.model";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { IBlogPost } from '../../../model/blogPost.model';
+import { IAppState } from '../../../store/store';
+import { PostsService } from '../../../posts/posts.service';
+import { Subscription, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
-  selector: "app-post-form",
-  templateUrl: "./post-form.component.html",
+  selector: 'app-post-form',
+  templateUrl: './post-form.component.html',
   styleUrls: [
-    "./post-form.component.css",
-    "./../../../shared/components/blog-card/blog-card.scss"
+    './post-form.component.css',
+    './../../../shared/components/blog-card/blog-card.scss'
   ]
 })
 export class PostFormComponent implements OnInit, OnDestroy {
   mode$: Subscription;
   editMode: boolean;
   createMode: boolean;
-  blog$: Observable<IBlogPost[]> = this.store.select("posts", "blogs");
+  blog$: Observable<IBlogPost[]> = this.store.select('posts', 'blogs');
   blogPost: IBlogPost;
   paramId: string;
 
@@ -33,7 +33,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.paramId = this.route.snapshot.params.id;
 
-    this.mode$ = this.store.select("mode").subscribe(mode => {
+    this.mode$ = this.store.select('mode').subscribe(mode => {
       this.editMode = mode.edit;
       this.createMode = mode.create;
     });
@@ -52,18 +52,18 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
   private setDefaultValues() {
     return (this.blogPost = {
-      location: "Narnia",
+      location: 'Narnia',
       lat: 0,
       lng: 0,
-      title: "Title of Blog Post",
-      description: "A brief description of the blog post entry",
+      title: 'Title of Blog Post',
+      description: 'A brief description of the blog post entry',
       imageUrl:
-        "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/w3css/img_mountains_wide.jpg"
+        'http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/w3css/img_mountains_wide.jpg'
     });
   }
 
   onSubmitForm(entry: NgForm) {
-    if (!!this.paramId && confirm("Update this Blog Post?")) {
+    if (!!this.paramId && confirm('Update this Blog Post?')) {
       console.log(entry.value);
       this.postsService.updatePost(this.blogPost.id, entry.value);
     } else if (this.createMode) this.postsService.createPost(entry);
@@ -73,7 +73,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   onDeletePost() {
-    if (!confirm("Are you sure you want to delete this Post?")) return null;
+    if (!confirm('Are you sure you want to delete this Post?')) return null;
 
     this.postsService.deletePost(this.blogPost.id);
 
@@ -81,7 +81,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    if (!confirm("Are you sure you want to cancel?")) return null;
+    if (!confirm('Are you sure you want to cancel?')) return null;
 
     this.postsService.returnToMainView();
   }
