@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { IAppState } from '../../store/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { activateCreateMode } from '../../store/actions/mode.actions';
+import { PostsService } from '../../posts/posts.service';
 
 @Component({
   selector: 'main-dashboard',
@@ -24,7 +24,11 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     .select('mode', 'view')
     .subscribe(viewMode => (this.viewMode = viewMode));
 
-  constructor(private router: Router, private store: Store<IAppState>) {}
+  constructor(
+    private router: Router,
+    private store: Store<IAppState>,
+    private postService: PostsService
+  ) {}
 
   ngOnInit() {
     this.blogsLoaded$ = this.store.select('posts', 'blogsLoaded');
@@ -41,9 +45,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     this.router.navigate(['post', 'edit', uid]);
   }
 
-  navToNewPostForm() {
-    this.store.dispatch(new activateCreateMode());
-    this.router.navigate(['/post/new']);
+  onNewPost() {
+    this.postService.navToNewPostForm();
   }
 
   ngOnDestroy() {

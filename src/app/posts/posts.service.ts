@@ -1,14 +1,17 @@
-import { Injectable } from "@angular/core";
-import { AngularFireDatabase } from "angularfire2/database";
-import { NgForm } from "@angular/forms";
-import { deactivateEditMode } from "../store/actions/mode.actions";
-import { Store } from "@ngrx/store";
-import { IAppState } from "../store/store";
-import "rxjs/add/operator/map";
-import { Router } from "@angular/router";
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { NgForm } from '@angular/forms';
+import {
+  deactivateEditMode,
+  activateCreateMode
+} from '../store/actions/mode.actions';
+import { Store } from '@ngrx/store';
+import { IAppState } from '../store/store';
+import 'rxjs/add/operator/map';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class PostsService {
   constructor(
@@ -19,11 +22,17 @@ export class PostsService {
 
   returnToMainView() {
     this.store.dispatch(new deactivateEditMode());
-    this.router.navigate(["/main"]);
+    this.router.navigate(['/main']);
+  }
+
+  navToNewPostForm() {
+    
+    this.store.dispatch(new activateCreateMode());
+    this.router.navigate(['/post/new']);
   }
 
   createPost(f: NgForm) {
-    this.db.list("/posts/").push({
+    this.db.list('/posts/').push({
       title: f.control.value.title,
       description: f.control.value.description,
       imageUrl: f.control.value.imageUrl,
@@ -33,7 +42,7 @@ export class PostsService {
 
   getAllPosts() {
     return this.db
-      .list("/posts")
+      .list('/posts')
       .snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -45,10 +54,10 @@ export class PostsService {
   }
 
   updatePost(blogId: string, post: NgForm) {
-    this.db.object("/posts/" + blogId).update(post);
+    this.db.object('/posts/' + blogId).update(post);
   }
 
   deletePost(blogId: string) {
-    this.db.object("/posts/" + blogId).remove();
+    this.db.object('/posts/' + blogId).remove();
   }
 }

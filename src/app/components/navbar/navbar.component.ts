@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnChanges, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { SigninDialogComponent } from '../signin-dialog/signin-dialog.component';
 import { Store } from '@ngrx/store';
@@ -8,8 +8,9 @@ import {
   activateEditMode,
   deactivateEditMode
 } from '../../store/actions/mode.actions';
-import { ActivatedRoute } from '@angular/router';
-import { tap, shareReplay } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { shareReplay } from 'rxjs/operators';
+import { PostsService } from '../../posts/posts.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,13 +19,16 @@ import { tap, shareReplay } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
+  id: string;
   userInfo$;
   editMode$;
 
   constructor(
+    private dialog: MatDialog,
+    private router: Router,
     private store: Store<IAppState>,
     private authService: AuthService,
-    private dialog: MatDialog
+    private postService: PostsService
   ) {}
 
   ngOnInit() {
@@ -35,6 +39,10 @@ export class NavbarComponent implements OnInit {
 
   openLogInDialog() {
     this.dialog.open(SigninDialogComponent);
+  }
+
+  onNewPost() {
+    this.postService.navToNewPostForm();
   }
 
   switchToEditMode() {

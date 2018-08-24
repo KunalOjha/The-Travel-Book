@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PostComponent } from './components/post/post.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
 import { AuthGuard } from '../auth.guard';
+import { ModeGuard } from '../mode.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
     path: 'post/new',
     component: PostFormComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, ModeGuard]
   },
   { path: 'post/:id', component: PostComponent }
 ];

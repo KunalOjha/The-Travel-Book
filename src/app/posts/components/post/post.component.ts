@@ -45,7 +45,8 @@ export class PostComponent implements OnInit {
 
     this.store.select('mode').subscribe(mode => {
       if (mode.edit) this.router.navigate(['post', 'edit', this.paramId]);
-      else if (mode.view) this.router.navigate(['post', this.paramId]);
+      else if (mode.view && this.paramId) {this.router.navigate(['post', this.paramId]) }
+      else if (mode.view && !this.paramId) {this.router.navigate(['/'])}
     });
   }
 }
