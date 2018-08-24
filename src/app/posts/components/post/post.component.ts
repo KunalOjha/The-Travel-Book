@@ -44,9 +44,17 @@ export class PostComponent implements OnInit {
       });
 
     this.store.select('mode').subscribe(mode => {
-      if (mode.edit) this.router.navigate(['post', 'edit', this.paramId]);
-      else if (mode.view && this.paramId) {this.router.navigate(['post', this.paramId]) }
-      else if (mode.view && !this.paramId) {this.router.navigate(['/'])}
+      if (mode.edit && this.blogPost) {
+        this.router.navigate(['post', 'edit', this.paramId])
+        this.blogPost = {};
+        };
+      else if (mode.view && this.blogPost) {
+         this.blogPost = {};
+        this.router.navigate(['post', this.paramId]) 
+        }
+      else if (mode.view && !this.blogPost) {
+         this.router.navigate(['/'])
+         }
     });
   }
 }
