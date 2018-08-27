@@ -16,6 +16,7 @@ import { requestBlogPosts } from '../../../store/actions/blog.actions';
 export class PostComponent implements OnInit {
   params$: Observable<ParamMap> = this.route.paramMap;
   paramId;
+  blogPost;
   blog$: Observable<IBlogPost[]> = this.store.select('posts', 'blogs');
   public blogPost: IBlogPost;
 
@@ -45,16 +46,14 @@ export class PostComponent implements OnInit {
 
     this.store.select('mode').subscribe(mode => {
       if (mode.edit && this.blogPost) {
-        this.router.navigate(['post', 'edit', this.paramId])
+        this.router.navigate(['post', 'edit', this.paramId]);
         this.blogPost = {};
-        };
-      else if (mode.view && this.blogPost) {
-         this.blogPost = {};
-        this.router.navigate(['post', this.paramId]) 
-        }
-      else if (mode.view && !this.blogPost) {
-         this.router.navigate(['/'])
-         }
+      } else if (mode.view && this.blogPost) {
+        this.blogPost = {};
+        this.router.navigate(['post', this.paramId]);
+      } else if (mode.view && !this.blogPost) {
+        this.router.navigate(['/']);
+      }
     });
   }
 }
