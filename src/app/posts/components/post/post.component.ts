@@ -16,9 +16,8 @@ import { requestBlogPosts } from '../../../store/actions/blog.actions';
 export class PostComponent implements OnInit {
   params$: Observable<ParamMap> = this.route.paramMap;
   paramId;
-  blogPost;
   blog$: Observable<IBlogPost[]> = this.store.select('posts', 'blogs');
-  public blogPost: IBlogPost;
+  blogPost: IBlogPost | {};
 
   constructor(
     private route: ActivatedRoute,
