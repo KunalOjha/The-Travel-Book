@@ -29,7 +29,7 @@ export class WorldMapComponent implements OnInit, OnDestroy {
         attribution: '...'
       })
     ],
-    zoom: 3,
+    zoom: 2,
     center: L.latLng(20, 0)
   };
   mapIcon = {
