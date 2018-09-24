@@ -7,6 +7,7 @@
 .post-title {
   position: absolute;
   text-align: center;
+  width: 75%;
   top: 225px;
   right: 50%;
   transform: translate(50%, -50%);
@@ -23,4 +24,14 @@
   .post-title {
     font-size: 52px;
   }
+}
+
+.loading-post-text {
+  text-align: center;
+  margin-top: 75px;
+}
+
+.blog-progress-spinner {
+  margin: 0 auto;
+  top: 25px;
 }

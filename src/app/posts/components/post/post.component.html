@@ -1,5 +1,10 @@
-<section class="container" *ngIf="!!blogPost">
+<section class="container" *ngIf="!!blogPost; else loadingPost">
   <img class="post-image" [src]="blogPost.imageUrl" alt="">
   <h1 class="post-title">{{blogPost.title}}</h1>
   <div class="post-content" [innerHTML]="blogPost.content"></div>
 </section>
+<ng-template #loadingPost>
+  <h2 class="loading-post-text">Loading Post...</h2>
+  <mat-progress-spinner class="blog-progress-spinner" *ngIf="blogPost" [color]="color" [mode]="mode">
+  </mat-progress-spinner>
+</ng-template> 

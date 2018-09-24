@@ -14,10 +14,12 @@ import { requestBlogPosts } from '../../../store/actions/blog.actions';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
+  color = 'warn';
+  mode = 'indeterminate';
   params$: Observable<ParamMap> = this.route.paramMap;
   paramId;
   blog$: Observable<IBlogPost[]> = this.store.select('posts', 'blogs');
-  blogPost: IBlogPost | {};
+  blogPost: IBlogPost | {} = null;
 
   constructor(
     private route: ActivatedRoute,
