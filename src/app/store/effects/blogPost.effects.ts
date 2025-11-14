@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
-import { map, switchMap } from "rxjs/operators";
+import { map, switchMap, catchError } from "rxjs/operators";
+import { of } from "rxjs/observable/of";
 import {
   REQUEST_BLOGPOSTS,
   loadBlogPostsSuccess
@@ -16,7 +17,11 @@ export class BlogEffects {
     switchMap(() => {
       return this.postsService.getAllPosts().pipe(
         map(result => {
-          return new loadBlogPostsSuccess(result);
+          return new loadBlogPostsSuccess(result || []);
+        }),
+        catchError(error => {
+          console.error('Error loading blog posts:', error);
+          return of(new loadBlogPostsSuccess([]));
         })
       );
     })

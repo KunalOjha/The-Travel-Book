@@ -46,7 +46,7 @@ export class PostsService {
       .snapshotChanges()
       .map(actions => {
         return actions.map(a => {
-          const data = a.payload.val();
+          const data = a.payload.val() as any;
           const id = a.payload.key;
           return { id, ...data };
         });

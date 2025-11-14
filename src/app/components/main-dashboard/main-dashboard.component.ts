@@ -4,6 +4,7 @@ import { IAppState } from '../../store/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { PostsService } from '../../posts/posts.service';
+import { requestBlogPosts } from '../../store/actions/blog.actions';
 
 @Component({
   selector: 'main-dashboard',
@@ -35,6 +36,9 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     this.blogPosts$ = this.store.select('posts', 'blogs');
 
     this.editMode$ = this.store.select('mode', 'edit');
+
+    // Dispatch action to load blog posts
+    this.store.dispatch(new requestBlogPosts());
   }
 
   selectBlogCard(uid: string) {
